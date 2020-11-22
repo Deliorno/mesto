@@ -1,0 +1,17 @@
+@keyframes opacity{
+0%{
+    opacity:1;
+}
+100%{
+    opacity:0.6;
+}
+}
+
+@keyframes opacity-btn{
+    0%{
+        opacity:1;
+    }
+    100%{
+        opacity:0.8;
+    }
+    }

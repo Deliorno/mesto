@@ -1,0 +1,6 @@
+.popup__underline{
+    height:1px;
+    border-bottom: 1px solid #000000;
+    opacity: 0.2;
+    margin: 13px 0 30px 0;
+}

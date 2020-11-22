@@ -1,0 +1,22 @@
+.profile__settings{
+    width:24px;
+    height:24px;
+    margin: 32px 0 0 18px;
+    padding:0;
+    object-fit: scale-down;
+    border: solid white 1px;
+    cursor: pointer;
+}
+.profile__settings:hover{
+    animation: opacity linear 0.3s forwards;
+    }
+    
+
+@media screen and (max-width:400px){
+    .profile__settings{
+        position: absolute;
+        width:18px;
+        height:18px;
+        margin: 7px 0 0 10px;
+    }
+}

@@ -1,0 +1,19 @@
+.popup__btn{
+    font-family: Inter;
+font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 22px;
+text-align: center;
+color: white;
+background: #000000;
+border-radius: 2px;
+border:none;
+width:100%;
+height:50px;
+cursor: pointer;
+}
+
+.popup__btn:hover{
+    animation: 0.3s linear forwards opacity-btn;
+}

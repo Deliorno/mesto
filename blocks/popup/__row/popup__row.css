@@ -1,0 +1,14 @@
+.popup__row{
+    color: #000000;
+    border:none;
+    margin:0;
+    padding:0;
+    outline: none;
+    font-family: Inter;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 17px;
+opacity: 1;
+z-index: 1;
+}
