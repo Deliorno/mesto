@@ -8,6 +8,8 @@
     background-repeat:no-repeat;
     z-index: 1;
     cursor: pointer;
+    background-color: transparent;
+    border: none;
 }
 
 @media screen and (max-width:500px){

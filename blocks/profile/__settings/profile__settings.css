@@ -7,6 +7,10 @@
     border: solid white 1px;
     cursor: pointer;
     align-self: center;
+    background-image: url(../../../images/pen.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
 }
 .profile__settings:hover{
     animation: opacity linear 0.3s forwards;
@@ -17,5 +21,6 @@
     .profile__settings{
         width:18px;
         height:18px;
+        max-width: 220px;
     }
 }

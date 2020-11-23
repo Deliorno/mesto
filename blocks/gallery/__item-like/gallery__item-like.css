@@ -1,13 +1,14 @@
 .gallery__item-like{
 align-self: flex-end;
-background-image: url(./../../../images/heart.png);
+background-image: url(./../../../images/heart.svg);
 width:20px;
 height:18px;
 background-size: contain;
 cursor: pointer;
+background-color: transparent;
+border:none;
 }
 
 .gallery__item-like:hover{
     animation: opacity linear 0.3s forwards;
-    cursor: pointer;
     }

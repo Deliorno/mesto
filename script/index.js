@@ -59,9 +59,7 @@ function formSubmitHandler (evt) {
 
     // Находим поля формы в DOM
     // Получите значение полей из свойства value
-   
     // Выберите элементы, куда должны быть вставлены значения полей
-    
     // Вставьте новые значения с помощью textContent
     profileName.innerHTML = nameInputVal;
     profileStatus.textContent = jobInputVal;

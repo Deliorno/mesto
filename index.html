@@ -6,14 +6,14 @@
     <link rel="stylesheet" href="./pages/index.css">
     <title>Mesto</title>
 </head>
-<body class="body">
+<body class="main">
     <div class="popup" id="popup">
         <div class="popup__container">
-            <div class="popup__close-cross"></div>
-            <form class="popup__card">
+            <button class="popup__close-cross"></button>
+            <form name="profile-settings" class="popup__card">
                 <h2 class="popup__header">Редактировать профиль</h2>
-                <input class="popup__row" id="name" value="" placeholder="Ваше имя">
-                <input class="popup__row" id="job" value="" placeholder="Чем занимаетесь?">
+                <input class="popup__row" name="name" id="name" value="" placeholder="Ваше имя">
+                <input class="popup__row" name="name" id="job" value="" placeholder="Чем занимаетесь?">
                 <button class="popup__btn" id="popup_btn" type="submit">Сохранить</button>
             </form>
         </div>
@@ -22,63 +22,63 @@
         <header class="header">
             <img alt="Лого" src="./images/logo.svg" class="header__logo">
         </header>
-        <div class="profile">
+        <section class="profile">
             <div class="profile__info">
-                <div class="profile__avatar"></div>
+                <img alt="Автар" src="./images/profileImage.png" class="profile__avatar">
                 <div class="profile__text-info">
                     <div class="profile__row">
-                        <h1 class="profile__name" id="profile__name">Жак-Ив Кусто</h1>
-                        <img alt="Настройки" src="./images/settings.png" id="settings" class="profile__settings">
+                        <h1 class="profile__name" id="profile__name">Жак-Ив Кустоwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww</h1>
+                        <button type="button" class="profile__settings" id="settings"></button>
                     </div>
                     <p class="profile__status" id="profile__status">Исследователь океана</p>
                 </div> 
             </div>
-            <button class="profile__add-btn anim-opacity"></button>
-        </div>
-        <div class="gallery">
+            <button type="button" class="profile__add-btn anim-opacity"></button>
+        </section>
+        <section class="gallery">
             <div class="gallery__item">
                 <img alt="Картинка" src="images/karachaevo.jpg" class="gallery__item-pic">
                 <div class="gallery__info">
                     <h2 class="gallery__item-title">Карачевск</h2>
-                    <div class="gallery__item-like"></div>
+                    <button class="gallery__item-like"></button>
                 </div>
             </div>
             <div class="gallery__item">
                 <img alt="Картинка" src="images/elbrus.png" class="gallery__item-pic">
                 <div class="gallery__info">
                     <h2 class="gallery__item-title">Гора Эльбрус</h2>
-                    <div class="gallery__item-like"></div>
+                    <button class="gallery__item-like"></button>
                 </div>
             </div>
             <div class="gallery__item">
                 <img alt="Картинка" src="images/dombai.png" class="gallery__item-pic">
                 <div class="gallery__info">
                     <h2 class="gallery__item-title">Домбай</h2>
-                    <div class="gallery__item-like gallery__item-like_active"></div>
+                    <button class="gallery__item-like"></button>
                 </div>
             </div>
             <div class="gallery__item">
                 <img alt="Картинка" src="images/elbrus.png" class="gallery__item-pic">
                 <div class="gallery__info">
                     <h2 class="gallery__item-title">Гора Эльбрус</h2>
-                    <div class="gallery__item-like"></div>
+                    <button class="gallery__item-like"></button>
                 </div>
             </div>
             <div class="gallery__item">
                 <img alt="Картинка" src="images/karachaevo.jpg" class="gallery__item-pic">
                 <div class="gallery__info">
                     <h2 class="gallery__item-title">Карачаево-Черкессия</h2>
-                    <div class="gallery__item-like"></div>
+                    <button class="gallery__item-like"></button>
                 </div>
             </div>
             <div class="gallery__item">
                 <img alt="Картинка" src="images/dombai.png" class="gallery__item-pic">
                 <div class="gallery__info">
                     <h2 class="gallery__item-title">Домбай</h2>
-                    <div class="gallery__item-like gallery__item-like_active"></div>
+                    <button class="gallery__item-like"></button>
                 </div>
             </div>
-        </div>
+        </section>
         <footer class="footer">
             <p class="footer__creator">© 2020 Mesto Russia</p>
         </footer>

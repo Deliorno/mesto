@@ -1,9 +1,7 @@
 .profile__avatar{
-    background-image: url(./../../../images/profileImage.png);
     height:120px;
     width:120px;
     border-radius: 100%;
-    background-size: contain;
 }
 
 @media screen and (max-width:700px){
