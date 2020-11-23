@@ -1,18 +1,23 @@
 
 let settings = document.querySelector('#settings');
 let popup =  document.getElementById('popup');
-let close_btn = document.querySelector('.popup__close-cross');
+let closeBtn = document.querySelector('.popup__close-cross');
+let save_btn = document.getElementById('popup_btn');
+let heart = document.querySelectorAll('.gallery__item-like');
+let profileName = document.querySelector('#profile__name');
+let nameInput = document.querySelector('#name');
+let profileStatus = document.querySelector('#profile__status');
+let nameInputVal = document.querySelector('#name').value;
+let jobInputVal = document.querySelector('#job').value;
 
 function togglePopUp(){
     if (popup.className=='popup') {
         popup.classList.add('popup_display_flex');
 
-        let profile__name = document.querySelector('#profile__name');
-        let nameInput = document.querySelector('#name');
-        nameInput.setAttribute('value',profile__name.textContent);
 
-        let profile__status = document.querySelector('#profile__status');
-        let jobInput = document.querySelector('#job').setAttribute('value', profile__status.textContent);
+        nameInput.value = profileName.textContent;
+
+        let jobInput = document.querySelector('#job').setAttribute('value', profileStatus.textContent);
     
     } else {
         popup.classList.remove('popup_display_flex');
@@ -22,19 +27,15 @@ function togglePopUp(){
         popup.classList.remove('popup_display_none');
 
 }); 
-close_btn.addEventListener('click', function ClosePopUp(){
+closeBtn.addEventListener('click', function ClosePopUp(){
     popup.classList.remove('popup_display_none');
 }); */
-settings.addEventListener('click', togglePopUp);
-close_btn.addEventListener('click', togglePopUp);
 
 // Находим форму в DOM
-let save_btn = document.getElementById('popup_btn');
 /*let nameInput = popup.querySelector('#name').getAttribute('value');
 console.log(nameInput);*/
 
 // Определение нажатого лайка, чекбокс?
-let heart = document.querySelectorAll('.gallery__item-like');
 let i =0;
 while ( i<heart.length){
 heart[i].addEventListener('click', function() {
@@ -58,17 +59,17 @@ function formSubmitHandler (evt) {
 
     // Находим поля формы в DOM
     // Получите значение полей из свойства value
-    let nameInput = document.querySelector('#name').value;// Воспользуйтесь инструментом .querySelector()
-    let jobInput = document.querySelector('#job').value;// Воспользуйтесь инструментом .querySelector()
+   
     // Выберите элементы, куда должны быть вставлены значения полей
-    let profile__name = document.querySelector('#profile__name');
-    let profile__status = document.querySelector('#profile__status');
+    
     // Вставьте новые значения с помощью textContent
-    profile__name.innerHTML = nameInput;
-    profile__status.textContent = jobInput;
+    profileName.innerHTML = nameInputVal;
+    profileStatus.textContent = jobInputVal;
     popup.classList.remove('popup_display_flex');
     return false;
 }
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 save_btn.addEventListener("submit", formSubmitHandler); 
+settings.addEventListener('click', togglePopUp);
+closeBtn.addEventListener('click', togglePopUp);
