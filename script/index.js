@@ -7,8 +7,7 @@ let heart = document.querySelectorAll('.gallery__item-like');
 let profileName = document.querySelector('#profile__name');
 let nameInput = document.querySelector('#name');
 let profileStatus = document.querySelector('#profile__status');
-let nameInputVal = document.querySelector('#name').value;
-let jobInputVal = document.querySelector('#job').value;
+let popupCard= document.querySelector('.popup__card');
 
 function togglePopUp(){
     if (popup.className=='popup') {
@@ -61,6 +60,8 @@ function formSubmitHandler (evt) {
     // Получите значение полей из свойства value
     // Выберите элементы, куда должны быть вставлены значения полей
     // Вставьте новые значения с помощью textContent
+    let nameInputVal = document.querySelector('#name').value;
+    let jobInputVal = document.querySelector('#job').value;
     profileName.innerHTML = nameInputVal;
     profileStatus.textContent = jobInputVal;
     popup.classList.remove('popup_display_flex');
@@ -68,6 +69,6 @@ function formSubmitHandler (evt) {
 }
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-save_btn.addEventListener("submit", formSubmitHandler); 
+popupCard.addEventListener('submit', formSubmitHandler); 
 settings.addEventListener('click', togglePopUp);
 closeBtn.addEventListener('click', togglePopUp);
