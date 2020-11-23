@@ -7,20 +7,18 @@
     <title>Mesto</title>
 </head>
 <body class="body">
-    <div class="content">
-        <div class="popup popup_display_none" id="popup">
-            <div class="popup__container">
-                <div class="popup__close-cross"></div>
-                <form class="popup__card">
-                    <h2 class="popup__header">Редактировать профиль 1234</h2>
-                    <input class="popup__row" id="name" value="" placeholder="Ваше имя">
-                        <div class="popup__underline"></div>
-                    <input class="popup__row" id="job" value="" placeholder="Чем занимаетесь?">
-                        <div class="popup__underline"></div>
-                    <button class="popup__btn" id="popup_btn" type="submit">Сохранить</button>
-                </form>
-            </div>
+    <div class="popup" id="popup">
+        <div class="popup__container">
+            <div class="popup__close-cross"></div>
+            <form class="popup__card">
+                <h2 class="popup__header">Редактировать профиль</h2>
+                <input class="popup__row" id="name" value="" placeholder="Ваше имя">
+                <input class="popup__row" id="job" value="" placeholder="Чем занимаетесь?">
+                <button class="popup__btn" id="popup_btn" type="submit">Сохранить</button>
+            </form>
         </div>
+    </div>
+    <div class="content">
         <header class="header">
             <img alt="Лого" src="./images/logo.svg" class="header__logo">
         </header>
@@ -28,10 +26,12 @@
             <div class="profile__info">
                 <div class="profile__avatar"></div>
                 <div class="profile__text-info">
-                    <h1 class="profile__name" id="profile__name">Жак-Ив Кусто</h1>
+                    <div class="profile__row">
+                        <h1 class="profile__name" id="profile__name">Жак-Ив Кусто</h1>
+                        <img alt="Настройки" src="./images/settings.png" id="settings" class="profile__settings">
+                    </div>
                     <p class="profile__status" id="profile__status">Исследователь океана</p>
                 </div> 
-                <img alt="Настройки" src="./images/settings.png" id="settings" class="profile__settings">
             </div>
             <button class="profile__add-btn anim-opacity"></button>
         </div>

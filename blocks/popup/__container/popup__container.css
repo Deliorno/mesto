@@ -1,5 +1,4 @@
 .popup__container{
-    position: fixed;
     margin: auto auto auto auto;
     display: flex;
     flex-direction: column;
@@ -7,6 +6,10 @@
     top:50%;
     bottom:50%;
     width:520px;
-    z-index: 1;
-    opacity: 1;
+}
+
+@media screen and (max-width:500px){
+    .popup__container{
+        max-width: 282px;
+    }
 }

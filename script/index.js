@@ -4,9 +4,8 @@ let popup =  document.getElementById('popup');
 let close_btn = document.querySelector('.popup__close-cross');
 
 function togglePopUp(){
-    if (popup.className=='popup popup_display_none') {
-        console.log("rkbr");
-        popup.classList.remove('popup_display_none');
+    if (popup.className=='popup') {
+        popup.classList.add('popup_display_flex');
 
         let profile__name = document.querySelector('#profile__name');
         let nameInput = document.querySelector('#name');
@@ -16,7 +15,7 @@ function togglePopUp(){
         let jobInput = document.querySelector('#job').setAttribute('value', profile__status.textContent);
     
     } else {
-        popup.classList.add('popup_display_none');
+        popup.classList.remove('popup_display_flex');
     }
 }
 /*settings.addEventListener('click', function OpenPopUp(){
@@ -67,7 +66,7 @@ function formSubmitHandler (evt) {
     // Вставьте новые значения с помощью textContent
     profile__name.innerHTML = nameInput;
     profile__status.textContent = jobInput;
-    popup.classList.add('popup_display_none');
+    popup.classList.remove('popup_display_flex');
     return false;
 }
 // Прикрепляем обработчик к форме:

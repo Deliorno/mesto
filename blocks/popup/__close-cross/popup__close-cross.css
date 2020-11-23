@@ -1,6 +1,6 @@
 .popup__close-cross{
     position: relative;
-    background-image: url(./../../../images/Close\ Icon.png);
+    background-image: url(../../../images/CloseIcon.svg);
     width:40px;
     height:40px;
     align-self: flex-end;
@@ -8,4 +8,18 @@
     background-repeat:no-repeat;
     z-index: 1;
     cursor: pointer;
+}
+
+@media screen and (max-width:500px){
+    .popup__close-cross{
+        width:26px;
+        height:26px;
+        margin: 0 0 7px 0;
+        background-size: contain;
+    }
+}
+
+.popup__close-cross:hover{
+    cursor: pointer;
+    animation: 0.3s linear forwards opacity;
 }
