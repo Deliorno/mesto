@@ -2,7 +2,6 @@
 let settings = document.querySelector('#settings');
 let popup =  document.getElementById('popup');
 let closeBtn = document.querySelector('.popup__close-cross');
-let save_btn = document.getElementById('popup_btn');
 let heart = document.querySelectorAll('.gallery__item-like');
 let profileName = document.querySelector('#profile__name');
 let nameInput = document.querySelector('#name');
