@@ -8,6 +8,9 @@ let profileName = document.querySelector('#profile__name');
 let nameInput = document.querySelector('#name');
 let profileStatus = document.querySelector('#profile__status');
 let popupCard= document.querySelector('.popup__card');
+let nameInputVal = document.querySelector('#name');
+let jobInputVal = document.querySelector('#job');
+let jobInput = document.querySelector('#job');
 
 function togglePopUp(){
     if (popup.className=='popup') {
@@ -15,8 +18,7 @@ function togglePopUp(){
 
 
         nameInput.value = profileName.textContent;
-
-        let jobInput = document.querySelector('#job').setAttribute('value', profileStatus.textContent);
+        jobInput.value = profileStatus.textContent;
     
     } else {
         popup.classList.remove('popup_display_flex');
@@ -60,10 +62,8 @@ function formSubmitHandler (evt) {
     // Получите значение полей из свойства value
     // Выберите элементы, куда должны быть вставлены значения полей
     // Вставьте новые значения с помощью textContent
-    let nameInputVal = document.querySelector('#name').value;
-    let jobInputVal = document.querySelector('#job').value;
-    profileName.innerHTML = nameInputVal;
-    profileStatus.textContent = jobInputVal;
+    profileName.textContent = nameInputVal.value;
+    profileStatus.textContent = jobInputVal.value;
     popup.classList.remove('popup_display_flex');
     return false;
 }
