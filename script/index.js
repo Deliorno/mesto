@@ -10,6 +10,10 @@ let popupCard= document.querySelector('.popup__card');
 let nameInputVal = document.querySelector('#name');
 let jobInputVal = document.querySelector('#job');
 let jobInput = document.querySelector('#job');
+let addPlaceBtn = document.querySelector('#add_btn');
+let addPlacePopup = document.querySelector('#popup_add');
+let addCloseBtn = document.querySelector('#close-cross');
+
 
 function togglePopUp(){
     if (popup.className=='popup') {
@@ -21,6 +25,18 @@ function togglePopUp(){
     
     } else {
         popup.classList.remove('popup_display_flex');
+    }
+}
+function togglePopUpAdd(){
+    if (addPlacePopup.className=='popup') {
+        addPlacePopup.classList.add('popup_display_flex');
+
+
+        nameInput.value = profileName.textContent;
+        jobInput.value = profileStatus.textContent;
+    
+    } else {
+        addPlacePopup.classList.remove('popup_display_flex');
     }
 }
 /*settings.addEventListener('click', function OpenPopUp(){
@@ -71,3 +87,6 @@ function formSubmitHandler (evt) {
 popupCard.addEventListener('submit', formSubmitHandler); 
 settings.addEventListener('click', togglePopUp);
 closeBtn.addEventListener('click', togglePopUp);
+
+addPlaceBtn.addEventListener('click', togglePopUpAdd);
+addCloseBtn.addEventListener('click', togglePopUpAdd);
