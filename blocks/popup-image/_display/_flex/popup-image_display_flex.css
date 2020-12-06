@@ -1,3 +1,4 @@
 .popup-image_display_flex{
-    display:flex;
+    opacity:1;
+    visibility: visible;
 }
