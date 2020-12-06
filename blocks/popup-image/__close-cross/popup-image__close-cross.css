@@ -1,10 +1,12 @@
-.popup__close-cross{
-    position: relative;
+.popup-image__close-cross{
+    position: absolute;
     background-image: url(../../../images/CloseIcon.svg);
     width:40px;
     height:40px;
     align-self: flex-end;
-    margin: 0 0 7px 0;
+    justify-self: flex-end;
+    margin:-40px;
+    padding:0;
     background-repeat:no-repeat;
     z-index: 1;
     cursor: pointer;
@@ -13,14 +15,15 @@
 }
 
 @media screen and (max-width:500px){
-    .popup__close-cross{
+    .popup-image__close-cross{
         width:26px;
         height:26px;
+        margin:-30px;
         background-size: contain;
     }
 }
 
-.popup__close-cross:hover{
+.popup-image__close-cross:hover{
     cursor: pointer;
     animation: 0.3s linear forwards opacity;
 }

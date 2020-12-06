@@ -16,6 +16,11 @@ let addCloseBtn = document.querySelector('#close-cross');
 let placeInput = document.querySelector('#place');
 let linkInput = document.querySelector('#link');
 
+let popupImage = document.querySelector('.popup-image');
+let popupFullImage = popupImage.querySelector('.popup-image__image');
+let popupSubtitle = popupImage.querySelector('.popup-image__subtitle');
+
+
 const galleryTemplate = document.querySelector('#gallery_item').content;
 console.log(galleryTemplate);
 
@@ -81,9 +86,32 @@ document.addEventListener('click', function() {
             let target = event.target;
             if (target.classList == "gallery__item-like"){
                 target.classList.add("gallery__item-like_active");
-            } else {
+            }else{
                 target.classList.remove("gallery__item-like_active");
             }
+
+            if(target.classList == 'gallery__trash-bin'){
+                target.closest('.gallery__item').remove();
+                initialCards.forEach(function(item,i) {
+                    if (item.name === target.closest('.gallery__item').querySelector('.gallery__item-title').textContent){
+                        initialCards.splice(i,1);
+                    }
+                })
+            }
+
+            if(target.classList == 'gallery__item-pic'){
+                console.log("Nryek yf rfhnbyre");
+                let subtitle = target.closest('.gallery__item').querySelector('.gallery__item-title').textContent;
+                let image = target.closest('.gallery__item').querySelector('.gallery__item-pic').src;
+                popupFullImage.src = image;
+                popupSubtitle.textContent = subtitle;
+                popupImage.classList.add('popup-image_display_flex');
+            }
+
+            if(target.classList == 'popup-image__close-cross'){
+                popupImage.classList.remove('popup-image_display_flex');
+            }
+
         });
         
 function togglePopUp(){
@@ -140,7 +168,6 @@ function AddCardformSubmit (evt) {
     initialCards.push({'name':placeInput.value,'link':linkInput.value});
     console.log(initialCards[length+1]);
     console.log(initialCards);
-
 
     galleryItem.querySelector('.gallery__item-pic').src = linkInput.value;
     galleryItem.querySelector('.gallery__item-title').textContent = placeInput.value;
