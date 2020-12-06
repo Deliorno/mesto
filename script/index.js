@@ -111,7 +111,6 @@ document.addEventListener('click', function() {
             if(target.classList == 'popup-image__close-cross'){
                 popupImage.classList.remove('popup-image_display_flex');
             }
-
         });
         
 function togglePopUp(){
