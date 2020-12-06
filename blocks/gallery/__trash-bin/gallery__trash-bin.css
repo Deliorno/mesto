@@ -1,0 +1,13 @@
+.gallery__trash-bin{
+    position: absolute;
+    width: 18px;
+    height:20px;
+    margin:18px 15px auto auto;
+    align-self: flex-end;
+    justify-self: flex-end;
+}
+
+.gallery__trash-bin:hover{
+    cursor: pointer;
+    animation: 0.3s linear forwards opacity-btn;
+}

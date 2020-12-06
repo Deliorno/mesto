@@ -30,6 +30,7 @@
 @import url(../blocks/profile/__add-btn/profile__add-btn.css);
 
 @import url(../blocks/gallery/gallery.css);
+@import url(../blocks/gallery/__trash-bin/gallery__trash-bin.css);
 @import url(../blocks/gallery/__item/gallery__item.css);
 @import url(../blocks/gallery/__info/gallery__info.css);
 @import url(../blocks/gallery/__item-title/gallery__item-title.css);

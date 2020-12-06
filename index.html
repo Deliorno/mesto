@@ -21,7 +21,7 @@
     <div class="popup" id="popup_add">
         <div class="popup__container">
             <button type="button" id="close-cross" class="popup__close-cross"></button>
-            <form name="profile-settings" class="popup__card">
+            <form name="profile-add-place" class="popup__card">
                 <h2 class="popup__header">Новое место</h2>
                 <input class="popup__row" name="place" id="place" value="" placeholder="Название">
                 <input class="popup__row" name="link" id="link" value="" placeholder="Ссылка на картинку">
@@ -47,7 +47,7 @@
             <button type="button" id="add_btn" class="profile__add-btn"></button>
         </section>
         <section class="gallery">
-            <div class="gallery__item">
+            <!-- <div class="gallery__item">
                 <img alt="Картинка" src="images/karachaevo.jpg" class="gallery__item-pic">
                 <div class="gallery__info">
                     <h2 class="gallery__item-title">Карачевск</h2>
@@ -88,12 +88,23 @@
                     <h2 class="gallery__item-title">Домбай</h2>
                     <button type="button" class="gallery__item-like"></button>
                 </div>
-            </div>
+            </div> -->
         </section>
     </main>
         <footer class="footer">
             <p class="footer__creator">© 2020 Mesto Russia</p>
         </footer>
+
+    <template id="gallery_item">
+        <div class="gallery__item">
+            <img class='gallery__trash-bin' src='./images/trash.svg' alt="Удалить">
+            <img alt="Картинка" src="" class="gallery__item-pic">
+            <div class="gallery__info">
+                <h2 class="gallery__item-title"></h2>
+                <button type="button" class="gallery__item-like"></button>
+            </div>
+        </div>
+    </template>
     <script src="script/index.js"></script>
 </body>
 </html>
