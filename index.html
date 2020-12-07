@@ -7,31 +7,31 @@
     <title>Mesto</title>
 </head>
 <body class="main">
-    <div class="popup-image" id="popup_image">
-        <div class="popup-image__container">
-            <button type="button" class="popup-image__close-cross"></button>
-            <img class = 'popup-image__image' src='https://images.unsplash.com/photo-1607190074257-dd4b7af0309f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80' alt='картинка'> 
-            <p class="popup-image__subtitle">Редактировать профиль</p>
+    <div class="popup" id="popup_image">
+        <div class="popup__container">
+            <button type="button" class="popup__close-cross" id="close-image"></button>
+            <img class = 'popup__image' src='https://images.unsplash.com/photo-1607190074257-dd4b7af0309f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80' alt='картинка'> 
+            <p class="popup__subtitle">Редактировать профиль</p>
         </div>
     </div>
     <div class="popup" id="popup">
         <div class="popup__container">
-            <button type="button" class="popup__close-cross"></button>
+            <button type="button" class="popup__close-cross" id="close-settings"></button>
             <form name="profile-settings" class="popup__card">
                 <h2 class="popup__header">Редактировать профиль</h2>
-                <input class="popup__row" name="name" id="name" value="" placeholder="Ваше имя">
-                <input class="popup__row" name="name" id="job" value="" placeholder="Чем занимаетесь?">
+                <input class="popup__row" name="name" type="text" required id="name" value="" placeholder="Ваше имя">
+                <input class="popup__row" name="name" type="text" id="job" value="" placeholder="Чем занимаетесь?">
                 <button class="popup__btn" id="popup_btn" type="submit">Сохранить</button>
             </form>
         </div>
     </div>
     <div class="popup" id="popup_add">
         <div class="popup__container">
-            <button type="button" id="close-cross" class="popup__close-cross"></button>
+            <button type="button" id="close-add" class="popup__close-cross"></button>
             <form name="profile-add-place" class="popup__card">
                 <h2 class="popup__header">Новое место</h2>
                 <input class="popup__row" name="place" id="place" value="" placeholder="Название">
-                <input class="popup__row" name="link" id="link" value="" placeholder="Ссылка на картинку">
+                <input class="popup__row" type="url" required name="link" id="link" value="" placeholder="Ссылка на картинку">
                 <button class="popup__btn" id="popup_add_btn" type="submit">Сохранить</button>
             </form>
         </div>
@@ -54,48 +54,6 @@
             <button type="button" id="add_btn" class="profile__add-btn"></button>
         </section>
         <section class="gallery">
-            <!-- <div class="gallery__item">
-                <img alt="Картинка" src="images/karachaevo.jpg" class="gallery__item-pic">
-                <div class="gallery__info">
-                    <h2 class="gallery__item-title">Карачевск</h2>
-                    <button type="button" class="gallery__item-like"></button>
-                </div>
-            </div>
-            <div class="gallery__item">
-                <img alt="Картинка" src="images/elbrus.png" class="gallery__item-pic">
-                <div class="gallery__info">
-                    <h2 class="gallery__item-title">Гора Эльбрус</h2>
-                    <button type="button" class="gallery__item-like"></button>
-                </div>
-            </div>
-            <div class="gallery__item">
-                <img alt="Картинка" src="images/dombai.png" class="gallery__item-pic">
-                <div class="gallery__info">
-                    <h2 class="gallery__item-title">Домбай</h2>
-                    <button type="button" class="gallery__item-like"></button>
-                </div>
-            </div>
-            <div class="gallery__item">
-                <img alt="Картинка" src="images/elbrus.png" class="gallery__item-pic">
-                <div class="gallery__info">
-                    <h2 class="gallery__item-title">Гора Эльбрус</h2>
-                    <button type="button" class="gallery__item-like"></button>
-                </div>
-            </div>
-            <div class="gallery__item">
-                <img alt="Картинка" src="images/karachaevo.jpg" class="gallery__item-pic">
-                <div class="gallery__info">
-                    <h2 class="gallery__item-title">Карачаево-Черкессия</h2>
-                    <button type="button" class="gallery__item-like"></button>
-                </div>
-            </div>
-            <div class="gallery__item">
-                <img alt="Картинка" src="images/dombai.png" class="gallery__item-pic">
-                <div class="gallery__info">
-                    <h2 class="gallery__item-title">Домбай</h2>
-                    <button type="button" class="gallery__item-like"></button>
-                </div>
-            </div> -->
         </section>
     </main>
         <footer class="footer">

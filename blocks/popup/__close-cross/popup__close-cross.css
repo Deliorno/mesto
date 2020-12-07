@@ -1,10 +1,11 @@
 .popup__close-cross{
-    position: relative;
+    position: absolute;
     background-image: url(../../../images/CloseIcon.svg);
     width:40px;
     height:40px;
+    outline: none;
     align-self: flex-end;
-    margin: 0 0 7px 0;
+    margin: -40px;
     background-repeat:no-repeat;
     z-index: 1;
     cursor: pointer;
@@ -16,6 +17,7 @@
     .popup__close-cross{
         width:26px;
         height:26px;
+        margin:-30px 0 0 0;
         background-size: contain;
     }
 }
