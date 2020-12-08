@@ -39,7 +39,7 @@
 @import url(../blocks/gallery/__item-title/gallery__item-title.css);
 @import url(../blocks/gallery/__item-like/gallery__item-like.css);
 @import url(../blocks/gallery/__item-like/_status/gallery__item-like_status_active.css);
-@import url(../blocks/gallery/__intem-pic/gallery__item-pic.css);
+@import url(../blocks/gallery/__item-pic/gallery__item-pic.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__creator/footer__creator.css);

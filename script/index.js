@@ -20,6 +20,7 @@ const popupImage = document.querySelector('#popup_image');
 const popupFullImage = popupImage.querySelector('.popup__image');
 const popupSubtitle = popupImage.querySelector('.popup__subtitle');
 
+const galleryContainer = document.querySelector(".gallery");
 const galleryTemplate = document.querySelector('#gallery_item').content;
 
 const initialCards = [
@@ -51,18 +52,11 @@ const initialCards = [
 
 function galleryItems() {
 initialCards.reverse().forEach(item => {
-    addCard(item.link,item.name)
+    galleryContainer.prepend(createCard(item.link,item.name));
     });
 };
 
 galleryItems();
-
-function addCardFormSubmit(evt){
-    evt.preventDefault(); 
-    addCard(linkInput.value, placeInput.value);
-    closePopup();
-    //initialCards.push({'name': placeInput.value,'link':linkInput.value});
-}
 
 function openPopup(evt, popupOpen = event.target){
     if (popupOpen.classList == 'profile__add-btn'){
@@ -76,19 +70,19 @@ function openPopup(evt, popupOpen = event.target){
     }
 }
 
-function closePopup(evt, pupClose = event.target){
-    if(pupClose.closest('#popup')){
-        pupClose.closest('#popup').classList.remove('popup_display_flex');
+function closePopup(evt, popupClose = event.target){
+    if(popupClose.closest('#popup')){
+        popupClose.closest('#popup').classList.remove('popup_display_flex');
     }
-    if(pupClose.closest('#popup_image')){
-        pupClose.closest('#popup_image').classList.remove('popup_display_flex');
+    if(popupClose.closest('#popup_image')){
+        popupClose.closest('#popup_image').classList.remove('popup_display_flex');
     }
-    if(pupClose.closest('#popup_add')){
-        pupClose.closest('#popup_add').classList.remove('popup_display_flex');
+    if(popupClose.closest('#popup_add')){
+        popupClose.closest('#popup_add').classList.remove('popup_display_flex');
     }
 }
 
-function addCard (link, name) {
+function createCard (link, name) {
     const galleryItem = galleryTemplate.cloneNode(true);
 
     galleryItem.querySelector('.gallery__item-pic').src = link;//linkInput.value;
@@ -118,7 +112,14 @@ function addCard (link, name) {
             // })
     });
 
-    document.querySelector('.gallery').prepend(galleryItem); 
+    return galleryItem;
+}
+
+function addCardFormSubmit(evt){
+    evt.preventDefault(); 
+    closePopup();
+    galleryContainer.prepend(createCard (linkInput.value, placeInput.value));
+    //initialCards.push({'name': placeInput.value,'link':linkInput.value});
 }
 
 function formSubmitHandler (evt) {
