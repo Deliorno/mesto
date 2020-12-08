@@ -2,23 +2,23 @@ const popup =  document.getElementById('popup');
 
 const closeCross= document.querySelectorAll('.popup__close-cross');
 
-let profileName = document.querySelector('#profile__name');
-let nameInput = document.querySelector('#name');
-let profileStatus = document.querySelector('#profile__status');
-let popupCard= document.querySelector('#popup_add');
-let nameInputVal = document.querySelector('#name');
-let jobInputVal = document.querySelector('#job');
-let jobInput = document.querySelector('#job');
+const profileName = document.querySelector('#profile__name');
+const nameInput = document.querySelector('#name');
+const profileStatus = document.querySelector('#profile__status');
+const popupCard= document.querySelector('#popup_add');
+const nameInputVal = document.querySelector('#name');
+const jobInputVal = document.querySelector('#job');
+const jobInput = document.querySelector('#job');
 
 const addPlaceBtn = document.querySelector('.profile__add-btn');
 const settingsBtn = document.querySelector('.profile__settings');
 
-let placeInput = document.querySelector('#place');
-let linkInput = document.querySelector('#link');
+const placeInput = document.querySelector('#place');
+const linkInput = document.querySelector('#link');
 
-let popupImage = document.querySelector('#popup_image');
-let popupFullImage = popupImage.querySelector('.popup__image');
-let popupSubtitle = popupImage.querySelector('.popup__subtitle');
+const popupImage = document.querySelector('#popup_image');
+const popupFullImage = popupImage.querySelector('.popup__image');
+const popupSubtitle = popupImage.querySelector('.popup__subtitle');
 
 const galleryTemplate = document.querySelector('#gallery_item').content;
 
@@ -49,88 +49,91 @@ const initialCards = [
     }
 ];
 
-function GalleryItems() {
+function galleryItems() {
 initialCards.reverse().forEach(item => {
     addCard(item.link,item.name)
     });
 };
 
-GalleryItems();
+galleryItems();
 
 function addCardFormSubmit(evt){
     evt.preventDefault(); 
-    addCard(linkInput.value, placeInput.value)
-    initialCards.push({'name': placeInput.value,'link':linkInput.value});
+    addCard(linkInput.value, placeInput.value);
+    closePopup();
+    //initialCards.push({'name': placeInput.value,'link':linkInput.value});
 }
 
-function closeOpenPopup(evt, btn = event.target){
-    if (btn.classList == 'profile__add-btn'){
+function openPopup(evt, popupOpen = event.target){
+    if (popupOpen.classList == 'profile__add-btn'){
         popupCard.classList.add('popup_display_flex');
     }
-    if (btn.classList == 'profile__settings'){
+    if (popupOpen.classList == 'profile__settings'){
         popup.classList.add('popup_display_flex');
     }
-    if(btn.closest('.popup')){
-        btn.closest('.popup').classList.remove('popup_display_flex');
+    if (popupOpen.classList == 'gallery__item-pic'){
+        popupImage.classList.add('popup_display_flex');
+    }
+}
+
+function closePopup(evt, pupClose = event.target){
+    if(pupClose.closest('#popup')){
+        pupClose.closest('#popup').classList.remove('popup_display_flex');
+    }
+    if(pupClose.closest('#popup_image')){
+        pupClose.closest('#popup_image').classList.remove('popup_display_flex');
+    }
+    if(pupClose.closest('#popup_add')){
+        pupClose.closest('#popup_add').classList.remove('popup_display_flex');
     }
 }
 
 function addCard (link, name) {
-    let galleryItem = galleryTemplate.cloneNode(true);
+    const galleryItem = galleryTemplate.cloneNode(true);
 
     galleryItem.querySelector('.gallery__item-pic').src = link;//linkInput.value;
     galleryItem.querySelector('.gallery__item-title').textContent = name;//placeInput.value;
 
     galleryItem.querySelector('.gallery__item-like').addEventListener('click', function() {
         let target = event.target;
-        if (target.classList == "gallery__item-like"){
-            target.classList.add("gallery__item-like_active");
-        }else{
-            target.classList.remove("gallery__item-like_active");
-        } 
+        target.classList.toggle("gallery__item-like_active");
     });
     
     galleryItem.querySelector('.gallery__item-pic').addEventListener('click', function() {
         let target = event.target;
-        if(target.classList == 'gallery__item-pic'){
-            let subtitle = target.closest('.gallery__item').querySelector('.gallery__item-title').textContent;
-            let image = target.closest('.gallery__item').querySelector('.gallery__item-pic').src;
+            const subtitle = target.closest('.gallery__item').querySelector('.gallery__item-title').textContent;
+            const image = target.closest('.gallery__item').querySelector('.gallery__item-pic').src;
             popupFullImage.src = image;
             popupSubtitle.textContent = subtitle;
-            popupImage.classList.add('popup_display_flex');
-        }
+            openPopup()
     });
 
     galleryItem.querySelector('.gallery__trash-bin').addEventListener('click', function() {
         let target = event.target;
-        if(target.classList == 'gallery__trash-bin'){
             target.closest('.gallery__item').remove();
-            initialCards.forEach(function(item,i) {
-                if (item.name === target.closest('.gallery__item').querySelector('.gallery__item-title').textContent){
-                    initialCards.splice(i,1);
-                }
-            })
-        }
+            // initialCards.forEach(function(item,i) {
+            //     if (item.name === target.closest('.gallery__item').querySelector('.gallery__item-title').textContent){
+            //         initialCards.splice(i,1);
+            //     }
+            // })
     });
 
     document.querySelector('.gallery').prepend(galleryItem); 
-    popupCard.classList.remove('popup_display_flex');
 }
 
 function formSubmitHandler (evt) {
     evt.preventDefault(); 
     profileName.textContent = nameInputVal.value;
     profileStatus.textContent = jobInputVal.value;
-    popup.classList.remove('popup_display_flex');
-    return false;
+    closePopup();
 }
 
 closeCross.forEach(item =>  {
-   item.addEventListener('click',closeOpenPopup);
+   item.addEventListener('click',closePopup);
  });
 
 popup.addEventListener('submit', formSubmitHandler); 
 
-addPlaceBtn.addEventListener('click', closeOpenPopup);
-settingsBtn.addEventListener('click', closeOpenPopup);
+addPlaceBtn.addEventListener('click', openPopup);
+settingsBtn.addEventListener('click', openPopup);
 popupCard.addEventListener('submit', addCardFormSubmit); 
