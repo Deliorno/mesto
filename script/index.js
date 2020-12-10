@@ -1,5 +1,7 @@
 const popup =  document.getElementById('popup');
 
+const popUp = document.querySelector(".popup");
+
 const closeCross= document.querySelectorAll('.popup__close-cross');
 
 const profileName = document.querySelector('#profile__name');
@@ -52,34 +54,18 @@ const initialCards = [
 
 function galleryItems() {
 initialCards.reverse().forEach(item => {
-    galleryContainer.prepend(createCard(item.link,item.name));
+    addCardOnPage(item.link, item.name);
     });
 };
 
 galleryItems();
 
-function openPopup(evt, popupOpen = event.target){
-    if (popupOpen.classList == 'profile__add-btn'){
-        popupCard.classList.add('popup_display_flex');
-    }
-    if (popupOpen.classList == 'profile__settings'){
-        popup.classList.add('popup_display_flex');
-    }
-    if (popupOpen.classList == 'gallery__item-pic'){
-        popupImage.classList.add('popup_display_flex');
-    }
+function openPopup(openpopup){
+        document.querySelector(openpopup).classList.add('popup_display_flex');  
 }
 
-function closePopup(evt, popupClose = event.target){
-    if(popupClose.closest('#popup')){
-        popupClose.closest('#popup').classList.remove('popup_display_flex');
-    }
-    if(popupClose.closest('#popup_image')){
-        popupClose.closest('#popup_image').classList.remove('popup_display_flex');
-    }
-    if(popupClose.closest('#popup_add')){
-        popupClose.closest('#popup_add').classList.remove('popup_display_flex');
-    }
+function closePopup(){
+        event.target.closest('.popup').classList.remove('popup_display_flex');
 }
 
 function createCard (link, name) {
@@ -88,28 +74,20 @@ function createCard (link, name) {
     galleryItem.querySelector('.gallery__item-pic').src = link;//linkInput.value;
     galleryItem.querySelector('.gallery__item-title').textContent = name;//placeInput.value;
 
-    galleryItem.querySelector('.gallery__item-like').addEventListener('click', function() {
-        let target = event.target;
+    galleryItem.querySelector('.gallery__item-like').addEventListener('click', function(evt,target = event.target) {
         target.classList.toggle("gallery__item-like_active");
     });
     
-    galleryItem.querySelector('.gallery__item-pic').addEventListener('click', function() {
-        let target = event.target;
+    galleryItem.querySelector('.gallery__item-pic').addEventListener('click', function(evt,target = event.target) {
             const subtitle = target.closest('.gallery__item').querySelector('.gallery__item-title').textContent;
             const image = target.closest('.gallery__item').querySelector('.gallery__item-pic').src;
             popupFullImage.src = image;
             popupSubtitle.textContent = subtitle;
-            openPopup()
+            openPopup("#popup_image");
     });
 
-    galleryItem.querySelector('.gallery__trash-bin').addEventListener('click', function() {
-        let target = event.target;
+    galleryItem.querySelector('.gallery__trash-bin').addEventListener('click', function(evt,target = event.target) {
             target.closest('.gallery__item').remove();
-            // initialCards.forEach(function(item,i) {
-            //     if (item.name === target.closest('.gallery__item').querySelector('.gallery__item-title').textContent){
-            //         initialCards.splice(i,1);
-            //     }
-            // })
     });
 
     return galleryItem;
@@ -118,8 +96,11 @@ function createCard (link, name) {
 function addCardFormSubmit(evt){
     evt.preventDefault(); 
     closePopup();
-    galleryContainer.prepend(createCard (linkInput.value, placeInput.value));
-    //initialCards.push({'name': placeInput.value,'link':linkInput.value});
+    addCardOnPage(linkInput.value, placeInput.value);
+}
+
+function addCardOnPage(link, name){
+    galleryContainer.prepend(createCard (link, name));
 }
 
 function formSubmitHandler (evt) {
@@ -135,6 +116,11 @@ closeCross.forEach(item =>  {
 
 popup.addEventListener('submit', formSubmitHandler); 
 
-addPlaceBtn.addEventListener('click', openPopup);
-settingsBtn.addEventListener('click', openPopup);
+//addPlaceBtn.addEventListener('click', openPopup);
+addPlaceBtn.addEventListener('click', function(){
+    openPopup('#popup_add');
+}, false);
+settingsBtn.addEventListener('click', function(){
+    openPopup('#popup');
+}, false);
 popupCard.addEventListener('submit', addCardFormSubmit); 
