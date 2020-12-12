@@ -1,7 +1,5 @@
 const popup =  document.getElementById('popup');
 
-const popUp = document.querySelector(".popup");
-
 const closeCross= document.querySelectorAll('.popup__close-cross');
 
 const profileName = document.querySelector('#profile__name');
@@ -61,11 +59,11 @@ initialCards.reverse().forEach(item => {
 galleryItems();
 
 function openPopup(openpopup){
-        document.querySelector(openpopup).classList.add('popup_display_flex');  
+    openpopup.classList.add('popup_display_flex');  
 }
 
-function closePopup(){
-        event.target.closest('.popup').classList.remove('popup_display_flex');
+function closePopup(evt){
+    event.target.closest('.popup').classList.remove('popup_display_flex');
 }
 
 function createCard (link, name) {
@@ -83,7 +81,7 @@ function createCard (link, name) {
             const image = target.closest('.gallery__item').querySelector('.gallery__item-pic').src;
             popupFullImage.src = image;
             popupSubtitle.textContent = subtitle;
-            openPopup("#popup_image");
+            openPopup(popupImage);
     });
 
     galleryItem.querySelector('.gallery__trash-bin').addEventListener('click', function(evt,target = event.target) {
@@ -116,11 +114,10 @@ closeCross.forEach(item =>  {
 
 popup.addEventListener('submit', formSubmitHandler); 
 
-//addPlaceBtn.addEventListener('click', openPopup);
 addPlaceBtn.addEventListener('click', function(){
-    openPopup('#popup_add');
+    openPopup(popupCard);
 }, false);
 settingsBtn.addEventListener('click', function(){
-    openPopup('#popup');
+    openPopup(popup);
 }, false);
 popupCard.addEventListener('submit', addCardFormSubmit); 
