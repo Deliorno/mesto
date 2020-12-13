@@ -3,12 +3,11 @@ const popup =  document.getElementById('popup');
 const closeCross= document.querySelectorAll('.popup__close-cross');
 
 const profileName = document.querySelector('#profile__name');
-const nameInput = document.querySelector('#name');
 const profileStatus = document.querySelector('#profile__status');
 const popupCard= document.querySelector('#popup_add');
 const nameInputVal = document.querySelector('#name');
 const jobInputVal = document.querySelector('#job');
-const jobInput = document.querySelector('#job');
+const popupSubmit = document.querySelectorAll('.popup__btn');
 
 const addPlaceBtn = document.querySelector('.profile__add-btn');
 const settingsBtn = document.querySelector('.profile__settings');
@@ -59,33 +58,35 @@ initialCards.reverse().forEach(item => {
 galleryItems();
 
 function openPopup(openpopup){
-    openpopup.classList.add('popup_display_flex');  
+    openpopup.classList.add('popup_display_flex');
 }
 
 function closePopup(evt){
-    event.target.closest('.popup').classList.remove('popup_display_flex');
+    evt.target.closest('.popup').classList.remove('popup_display_flex');
 }
 
 function createCard (link, name) {
     const galleryItem = galleryTemplate.cloneNode(true);
 
     galleryItem.querySelector('.gallery__item-pic').src = link;//linkInput.value;
+    galleryItem.querySelector('.gallery__item-pic').alt = name;
     galleryItem.querySelector('.gallery__item-title').textContent = name;//placeInput.value;
 
-    galleryItem.querySelector('.gallery__item-like').addEventListener('click', function(evt,target = event.target) {
-        target.classList.toggle("gallery__item-like_active");
+    galleryItem.querySelector('.gallery__item-like').addEventListener('click', function(evt) {
+        console.log(evt.target);
+        evt.target.classList.toggle("gallery__item-like_active");
     });
     
-    galleryItem.querySelector('.gallery__item-pic').addEventListener('click', function(evt,target = event.target) {
-            const subtitle = target.closest('.gallery__item').querySelector('.gallery__item-title').textContent;
-            const image = target.closest('.gallery__item').querySelector('.gallery__item-pic').src;
+    galleryItem.querySelector('.gallery__item-pic').addEventListener('click', function(evt) {
+            const subtitle = evt.target.closest('.gallery__item').querySelector('.gallery__item-title').textContent;
+            const image = evt.target.closest('.gallery__item').querySelector('.gallery__item-pic').src;
             popupFullImage.src = image;
             popupSubtitle.textContent = subtitle;
             openPopup(popupImage);
     });
 
-    galleryItem.querySelector('.gallery__trash-bin').addEventListener('click', function(evt,target = event.target) {
-            target.closest('.gallery__item').remove();
+    galleryItem.querySelector('.gallery__trash-bin').addEventListener('click', function(evt) {
+        evt.target.closest('.gallery__item').remove();
     });
 
     return galleryItem;
@@ -93,7 +94,7 @@ function createCard (link, name) {
 
 function addCardFormSubmit(evt){
     evt.preventDefault(); 
-    closePopup();
+    closePopup(evt);
     addCardOnPage(linkInput.value, placeInput.value);
 }
 
@@ -105,12 +106,13 @@ function formSubmitHandler (evt) {
     evt.preventDefault(); 
     profileName.textContent = nameInputVal.value;
     profileStatus.textContent = jobInputVal.value;
-    closePopup();
+    closePopup(evt);
 }
 
 closeCross.forEach(item =>  {
    item.addEventListener('click',closePopup);
  });
+ 
 
 popup.addEventListener('submit', formSubmitHandler); 
 
@@ -118,6 +120,8 @@ addPlaceBtn.addEventListener('click', function(){
     openPopup(popupCard);
 }, false);
 settingsBtn.addEventListener('click', function(){
+    nameInputVal.value = profileName.textContent;
+    jobInputVal.value = profileStatus.textContent;
     openPopup(popup);
 }, false);
 popupCard.addEventListener('submit', addCardFormSubmit); 
