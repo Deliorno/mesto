@@ -62,7 +62,14 @@ function openPopup(openpopup){
 }
 
 function closePopup(evt){
+    const popupAll = document.querySelectorAll('.popup');
+    if (evt === 'Escape'){
+        popupAll.forEach( escClose =>{
+            escClose.classList.remove('popup_display_flex');
+        })
+    } else{
     evt.target.closest('.popup').classList.remove('popup_display_flex');
+            }
 }
 
 function createCard (link, name) {
@@ -73,7 +80,6 @@ function createCard (link, name) {
     galleryItem.querySelector('.gallery__item-title').textContent = name;//placeInput.value;
 
     galleryItem.querySelector('.gallery__item-like').addEventListener('click', function(evt) {
-        console.log(evt.target);
         evt.target.classList.toggle("gallery__item-like_active");
     });
     
@@ -113,7 +119,6 @@ closeCross.forEach(item =>  {
    item.addEventListener('click',closePopup);
  });
  
-
 popup.addEventListener('submit', formSubmitHandler); 
 
 addPlaceBtn.addEventListener('click', function(){
@@ -124,4 +129,10 @@ settingsBtn.addEventListener('click', function(){
     jobInputVal.value = profileStatus.textContent;
     openPopup(popup);
 }, false);
-popupCard.addEventListener('submit', addCardFormSubmit); 
+popupCard.addEventListener('submit', addCardFormSubmit);
+
+document.addEventListener('keydown', function(){
+    if (event.key === 'Escape'){
+        closePopup(event.key);
+        }
+});

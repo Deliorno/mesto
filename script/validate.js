@@ -1,67 +1,62 @@
-
-//const errMesTooShort = 'Минимальное количество символов:2. Длина текста сейчас: 1 символ';
-//const errMesNothing = 'Вы пропустили это поле';
-//const errName = document.querySelector(`#name`);
-
-//const buttonElement = 
-
-const showInputError = (inputElement, errorMessage) => {
-    const errorElement = document.querySelector(`.${inputElement.id}-error`);
+const showInputError = (form, inputElement, errorMessage, config) => {
+    const errorElement = form.querySelector(`.${inputElement.id}-error`);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add('popup__row-error_active');
+    errorElement.classList.add(config.errorClass);
   };
   
-  const hideInputError = (inputElement) => {
-    const errorElement = document.querySelector(`.${inputElement.id}-error`);
-    errorElement.classList.remove('popup__row-error_active');
+  const hideInputError = (form, inputElement, config) => {
+    const errorElement = form.querySelector(`.${inputElement.id}-error`);
+    errorElement.classList.remove(config.errorClass);
     errorElement.textContent = '';
   };
 
-function validateText(inputElement){
-    //console.log(inputElement.id);
-    //console.log(inputElement.validity.valid);
-    //console.log(inputElement.validationMessage);
-    errorElement = document.querySelector(`.${inputElement.id}-error`);
+function validateText(form, inputElement, config){
+    errorElement = form.querySelector(`.${inputElement.id}-error`);
     if (!(inputElement.validity.valid))
     {
-        showInputError(inputElement, inputElement.validationMessage);
+        showInputError(form, inputElement, inputElement.validationMessage, config);
     } else {
-        hideInputError(inputElement);
+        hideInputError(form, inputElement, config);
     }
 }
-//document.querySelector('#name').addEventListener('input', validateText);
 
-const toggleButtonState = (inputList, buttonElement) => {
-    // Если есть хотя бы один невалидный инпут
-    if (hasInvalidInput(inputList)) {
-      // сделай кнопку неактивной
-      buttonElement.classList.add('form__submit_inactive');
-    } else {
-          // иначе сделай кнопку активной
-      buttonElement.classList.remove('form__submit_inactive');
-    }
-  }; 
+function toggleButton(submitButton, isValid, config){
+if (!isValid){
+    submitButton.classList.add(config.inactiveButtonClass);
+    submitButton.disabled = 'disabled';
+} else {
+    submitButton.classList.remove(config.inactiveButtonClass);
+    submitButton.disabled = false;
+}
+}
 
-function setEventListeners(){
-    const inputList = Array.from(document.querySelectorAll('.popup__row'));
+function setEventListener(form, config){
+    const inputList = Array.from(form.querySelectorAll(config.inputSelector));
+    const submitButton = form.querySelector(config.submitButtonSelector);
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', function () {
-        validateText(inputElement);
+        validateText(form, inputElement, config);
+        toggleButton(submitButton, form.checkValidity(), config);
       });
     });
-  };
+}
 
-  function hasInvalidInput(inputList){
-    return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  }); 
-  }
-  
-  function toggleButtonState(inputList,buttonElement){
-    if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('button_inactive');
-  } else {
-    buttonElement.classList.remove('button_inactive');
-  } 
-  }
-  setEventListeners();
+  function formValidation(config){
+    const allFroms = document.querySelectorAll(config.formSelector);
+    allFroms.forEach(form =>{
+        setEventListener(form, config);
+        const submitButton = form.querySelector(config.submitButtonSelector);
+        //toggleButton(submitButton, form.checkValidity(), config);
+    })
+    }
+
+    const config = {
+        formSelector: '.popup__card',
+        inputSelector: '.popup__row',
+        submitButtonSelector: '.popup__btn',
+        inactiveButtonClass: 'popup__btn_disabled',
+        //inputErrorClass: 'popup__input_type_error',
+        errorClass: 'popup__row-error_active'
+      }; 
+
+    formValidation(config);
