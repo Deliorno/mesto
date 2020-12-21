@@ -19,8 +19,14 @@
             <button type="button" class="popup__close-cross" id="close-settings"></button>
             <form name="profile-settings" class="popup__card">
                 <h2 class="popup__header">Редактировать профиль</h2>
-                <input class="popup__row" name="name" type="text" required id="name" value="" placeholder="Ваше имя">
-                <input class="popup__row" name="name" type="text" id="job" value="" placeholder="Чем занимаетесь?">
+                <div class="popup__field">
+                    <input class="popup__row" name="name" type="text" minlength="2" minlength="40" required id="name" value="" placeholder="Ваше имя">
+                    <span class="popup__row-error name-error"></span>
+                </div>
+                <div class="popup__field">
+                    <input class="popup__row" name="name" type="text" id="job" minlength="2" required minlength="200" value="" placeholder="Чем занимаетесь?">
+                    <span class="popup__row-error job-error"></span>
+                </div>
                 <button class="popup__btn" id="popup_btn" type="submit">Сохранить</button>
             </form>
         </div>
@@ -30,8 +36,14 @@
             <button type="button" id="close-add" class="popup__close-cross"></button>
             <form name="profile-add-place" class="popup__card">
                 <h2 class="popup__header">Новое место</h2>
-                <input class="popup__row" name="place" id="place" value="" placeholder="Название">
-                <input class="popup__row" type="url" required name="link" id="link" value="" placeholder="Ссылка на картинку">
+                    <div class="popup__field">
+                        <input class="popup__row" type="text" minlength="2" minlength="30" name="place" id="place" value="" placeholder="Название" required>
+                        <span class="popup__row-error place-error"></span>
+                    </div>
+                    <div class="popup__field">
+                        <input class="popup__row" type="url" name="link" id="link" value="" placeholder="Ссылка на картинку" required>
+                        <span class="popup__row-error link-error"></span>
+                    </div>
                 <button class="popup__btn" id="popup_add_btn" type="submit">Сохранить</button>
             </form>
         </div>
@@ -70,5 +82,6 @@
         </div>
     </template>
     <script src="script/index.js"></script>
+    <script src="script/validate.js"></script>
 </body>
 </html>
