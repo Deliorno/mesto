@@ -39,6 +39,7 @@ function openPopup(openedPopup){
 function closePopup(openedPopup){
     openedPopup.classList.remove('popup_display_flex');
     document.removeEventListener('keydown', closeByEscape);
+    openedPopup.removeEventListener('mousedown', closeByOutside);
 }
 
 function closeByEscape(event){
@@ -49,11 +50,11 @@ function closeByEscape(event){
 }
 function closeByOutside(event){
     const openedPopup = document.querySelector('.popup_display_flex'); 
-    if(openedPopup != null){
+
         if (event.target === openedPopup.closest('.popup')){
             closePopup(openedPopup);
             }
-        }
+    
 }
 
 function createCard (link, name) {
