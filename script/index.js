@@ -1,6 +1,6 @@
-const popup_profile =  document.getElementById('popup_profile');
+const popupProfile =  document.getElementById('popup_profile');
 
-//const closeCross= document.querySelectorAll('.popup__close-cross');
+const closeCross= document.querySelectorAll('.popup__close-cross');
 
 const profileName = document.querySelector('#profile__name');
 const profileStatus = document.querySelector('#profile__status');
@@ -22,34 +22,6 @@ const popupSubtitle = popupImage.querySelector('.popup__subtitle');
 const galleryContainer = document.querySelector(".gallery");
 const galleryTemplate = document.querySelector('#gallery_item').content;
 
-//Что? как вынести в отдельный файл?
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
-
 function galleryItems() {
 initialCards.reverse().forEach(item => {
     addCardOnPage(item.link, item.name);
@@ -60,29 +32,18 @@ galleryItems();
 
 function openPopup(openedPopup){
     openedPopup.classList.add('popup_display_flex');
-    const closeOpenedPopUp = openedPopup.querySelector('.popup__close-cross');
-    const closeOnSubmit = openedPopup.querySelector('.popup__btn');
-    closeOpenedPopUp.addEventListener('click', function(){
-        closePopup(openedPopup);
-    })
-    if (closeOnSubmit != null){
-        closeOnSubmit.addEventListener('click', function(){
-            closePopup(openedPopup);
-        })
-    }
     document.addEventListener('keydown', closeByEscape);
     openedPopup.addEventListener('mousedown', closeByOutside);
 }
 
 function closePopup(openedPopup){
     openedPopup.classList.remove('popup_display_flex');
-    document.removeEventListener('keyup', closeByEscape);
-    document.removeEventListener('keyup', closeByEscape);
+    document.removeEventListener('keydown', closeByEscape);
 }
 
 function closeByEscape(event){
     if (event.key === 'Escape'){
-        const openedPopup = document.querySelector('.popup_display_flex'); //никогда бы не догадалась искать по открытому попАпу =_=
+        const openedPopup = document.querySelector('.popup_display_flex');
         closePopup(openedPopup);
         }
 }
@@ -124,6 +85,7 @@ function createCard (link, name) {
 function addCardFormSubmit(evt){
     evt.preventDefault(); 
     addCardOnPage(linkInput.value, placeInput.value);
+    closePopup(popupCard);
 }
 
 function addCardOnPage(link, name){
@@ -134,16 +96,22 @@ function submitProfileForm (evt) {
     evt.preventDefault(); 
     profileName.textContent = nameInputVal.value;
     profileStatus.textContent = jobInputVal.value;
+    closePopup(popupProfile);
 }
 
-// closeCross.forEach(item =>  {
-//    item.addEventListener('click',closePopup);
-//  });
+closeCross.forEach(item =>  {
+   item.addEventListener('click',function(){
+    const openedPopup = document.querySelector('.popup_display_flex');
+       closePopup(openedPopup);
+   });
+  });
  
-popup_profile.addEventListener('submit', submitProfileForm); 
+popupProfile.addEventListener('submit', submitProfileForm); 
 
 addPlaceBtn.addEventListener('click', function(){
-    popupCard.querySelector('.popup__btn').setAttribute('disabled', 'disabled');
+    const popupCardSubmitBtn = popupCard.querySelector('.popup__btn');
+    popupCardSubmitBtn.setAttribute('disabled', 'disabled');
+    popupCardSubmitBtn.classList.add('.popup__btn_disabled');
     placeInput.value = '';
     linkInput.value = '';
     openPopup(popupCard);
@@ -151,6 +119,6 @@ addPlaceBtn.addEventListener('click', function(){
 settingsBtn.addEventListener('click', function(){
     nameInputVal.value = profileName.textContent;
     jobInputVal.value = profileStatus.textContent;
-    openPopup(popup_profile);
+    openPopup(popupProfile);
 }, false);
 popupCard.addEventListener('submit', addCardFormSubmit);
