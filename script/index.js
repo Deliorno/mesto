@@ -111,7 +111,7 @@ popupProfile.addEventListener('submit', submitProfileForm);
 addPlaceBtn.addEventListener('click', function(){
     const popupCardSubmitBtn = popupCard.querySelector('.popup__btn');
     popupCardSubmitBtn.setAttribute('disabled', 'disabled');
-    popupCardSubmitBtn.classList.add('.popup__btn_disabled');
+    popupCardSubmitBtn.classList.add('popup__btn_disabled');
     placeInput.value = '';
     linkInput.value = '';
     openPopup(popupCard);

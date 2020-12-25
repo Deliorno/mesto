@@ -20,11 +20,11 @@
             <form name="profile-settings" class="popup__card">
                 <h2 class="popup__header">Редактировать профиль</h2>
                 <div class="popup__field">
-                    <input class="popup__row" name="name" type="text" minlength="2" maxlength="40" required id="name" value="" placeholder="Ваше имя">
+                    <input class="popup__row" name="name" type="text" minlength="2" minlength="40" required id="name" value="" placeholder="Ваше имя">
                     <span class="popup__row-error name-error"></span>
                 </div>
                 <div class="popup__field">
-                    <input class="popup__row" name="name" type="text" id="job" minlength="2" required maxlength="200" value="" placeholder="Чем занимаетесь?">
+                    <input class="popup__row" name="name" type="text" id="job" minlength="2" required minlength="200" value="" placeholder="Чем занимаетесь?">
                     <span class="popup__row-error job-error"></span>
                 </div>
                 <button class="popup__btn" id="popup_btn" type="submit">Сохранить</button>
@@ -37,14 +37,14 @@
             <form name="profile-add-place" class="popup__card">
                 <h2 class="popup__header">Новое место</h2>
                     <div class="popup__field">
-                        <input class="popup__row" type="text" minlength="2" maxlength="30" name="place" id="place" value="" placeholder="Название" required>
+                        <input class="popup__row" type="text" minlength="2" minlength="30" name="place" id="place" value="" placeholder="Название" required>
                         <span class="popup__row-error place-error"></span>
                     </div>
                     <div class="popup__field">
                         <input class="popup__row" type="url" name="link" id="link" value="" placeholder="Ссылка на картинку" required>
                         <span class="popup__row-error link-error"></span>
                     </div>
-                <button class="popup__btn popup__btn_disabled" id="popup_add_btn" type="submit">Сохранить</button>
+                <button class="popup__btn" id="popup_add_btn" type="submit">Сохранить</button>
             </form>
         </div>
     </div>
