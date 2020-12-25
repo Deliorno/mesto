@@ -49,12 +49,10 @@ function closeByEscape(event){
         }
 }
 function closeByOutside(event){
-    const openedPopup = document.querySelector('.popup_display_flex'); 
-
+    const openedPopup = document.querySelector('.popup_display_flex');
         if (event.target === openedPopup.closest('.popup')){
             closePopup(openedPopup);
             }
-    
 }
 
 function createCard (link, name) {
