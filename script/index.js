@@ -1,4 +1,5 @@
-import {Card} from './Card.js'
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js'
 const popupProfile =  document.getElementById('popup_profile');
 
 const closeCross= document.querySelectorAll('.popup__close-cross');
@@ -12,19 +13,36 @@ const jobInputVal = document.querySelector('#job');
 const addPlaceBtn = document.querySelector('.profile__add-btn');
 const settingsBtn = document.querySelector('.profile__settings');
 
+const gallery = document.querySelector('.gallery');
+
 const placeInput = document.querySelector('#place');
 const linkInput = document.querySelector('#link');
+const formNewPlace = new FormValidator(document.querySelector('[name="profile-add-place"]'));
+formNewPlace.enableValidation();
+const formRefreshDescription = new FormValidator(document.querySelector('[name="profile-settings"]'));
+formRefreshDescription.enableValidation();
 
- function galleryItems() {
+function createCard(name, link){
+    const card = new Card(name, link);
+    return card;
+}
+
+ function renderGalleryItems() {
  initialCards.reverse().forEach(item => {
-    const card = new Card(item.name, item.link);
-     addCardOnPage(card);
+    //const card = new Card(item.name, item.link);
+     addCardOnPage(createCard(item.name, item.link));
      });
  };
 
- galleryItems();
+ renderGalleryItems();
 
 export function openPopup(openedPopup){
+    document.querySelector('#popup_btn').classList.remove('popup__btn_disabled');
+    const error = Array.from(document.querySelectorAll('.popup__row-error'));
+    error.forEach((err) => {
+            err.textContent='';
+      });
+
     openedPopup.classList.add('popup_display_flex');
     document.addEventListener('keydown', closeByEscape);
     openedPopup.addEventListener('mousedown', closeByOutside);
@@ -51,14 +69,13 @@ function closeByOutside(event){
 
 function addCardFormSubmit(evt){
     evt.preventDefault();
-    const card = new Card(name, link); 
-    addCardOnPage(card);
+    addCardOnPage(createCard(item.name, item.link));
     closePopup(popupCard);
 }
 
 function addCardOnPage(card){
     const galleryElement = card.renderCard();
-    document.querySelector('.gallery').prepend(galleryElement);
+    gallery.prepend(galleryElement);
 }
 
 function submitProfileForm (evt) {
