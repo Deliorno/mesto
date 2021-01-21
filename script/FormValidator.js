@@ -29,7 +29,6 @@ const config = {
         errorElement.textContent = '';
       };
     
-
     _validateText(inputElement){
         if (!(inputElement.validity.valid))
         {

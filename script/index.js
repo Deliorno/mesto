@@ -69,7 +69,7 @@ function closeByOutside(event){
 
 function addCardFormSubmit(evt){
     evt.preventDefault();
-    addCardOnPage(createCard(item.name, item.link));
+    addCardOnPage(createCard(placeInput.value, linkInput.value));
     closePopup(popupCard);
 }
 
