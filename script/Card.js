@@ -1,10 +1,13 @@
 //import initialCards from "./data.js"
-import {openPopup} from './index.js'
+//import {openPopup} from './index.js'
 const popupImage = document.querySelector('#popup_image');
+const popupImageClass = document.querySelector('.popup__image');
+const subtitle = document.querySelector('.popup__subtitle');
 export class Card {
-    constructor(name, link){
+    constructor(name, link, openPopup){
         this._name = name;
         this._link = link;
+        this._openPopup = openPopup;
     }
 
     _getTemplate(){
@@ -14,17 +17,16 @@ export class Card {
 
     renderCard(){
         this._element = this._getTemplate();
-        this._setEventListeners();
+
         // Добавим данные
-        this._element.querySelector('.gallery__item-pic').src = this._link;
-        this._element.querySelector('.gallery__item-pic').alt = this._name;
+        const pic = this._element.querySelector('.gallery__item-pic');
+        pic.src = this._link;
+        pic.alt = this._name;
         this._element.querySelector('.gallery__item-title').textContent = this._name;
 
+        this._setEventListeners(pic);
+
         // - Вернём элемент наружу!
-        // *интонация Куплина*
-        // - Какая ружа? Ты посмотри там че происходит! 
-        // Иди, говорит, наружу. Никакой ружи не будет.
-        // - error message
         return this._element;
         }
 
@@ -33,23 +35,22 @@ export class Card {
 }
 
     _openImage(){
-        console.log(this._link)
-        document.querySelector('.popup__image').src = this._link;
-        document.querySelector('.popup__image').alt = this._name;
-        document.querySelector('.popup__subtitle').textContent = this._name;
-    openPopup(popupImage);
+        popupImageClass.src = this._link;
+        popupImageClass.alt = this._name;
+        subtitle.textContent = this._name;
+        this._openPopup(popupImage);
 }
 
     _deleteImage(bin){
         bin.closest('.gallery__item').remove();
     }
 
-    _setEventListeners(){
+    _setEventListeners(pic){
     this._element.querySelector('.gallery__item-like').addEventListener('click', () => {
         this._toogleLike(event.target);
       });
 
-    this._element.querySelector('.gallery__item-pic').addEventListener('click', () => {
+    pic.addEventListener('click', () => {
          this._openImage();
        });
 
