@@ -1,23 +1,8 @@
 
-// const validationConfig = {
-//     formSelector: '.popup__card',
-//     inputSelector: '.popup__row',
-//     submitButtonSelector: '.popup__btn',
-//     inactiveButtonClass: 'popup__btn_disabled',
-//     //inputErrorClass: 'popup__input_type_error',
-//     errorClass: 'popup__row-error_active'
-//   };
   export class FormValidator {
-    constructor(form){
+    constructor(form, validationConfig){
         this.form = form;
-        this.validationConfig = {
-            formSelector: '.popup__card',
-            inputSelector: '.popup__row',
-            submitButtonSelector: '.popup__btn',
-            inactiveButtonClass: 'popup__btn_disabled',
-            //inputErrorClass: 'popup__input_type_error',
-            errorClass: 'popup__row-error_active'
-          };
+        this.validationConfig = validationConfig;
     }
     
     enableValidation(){
@@ -42,7 +27,6 @@
       };
       
     _hideInputError(inputElement){
-        console.log(inputElement.id);
         const errorElement = this.form.querySelector(`.${inputElement.id}-error`);
         errorElement.classList.remove(this.validationConfig.errorClass);
         errorElement.textContent = '';

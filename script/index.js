@@ -17,9 +17,24 @@ const gallery = document.querySelector('.gallery');
 
 const placeInput = document.querySelector('#place');
 const linkInput = document.querySelector('#link');
-const formNewPlace = new FormValidator(document.querySelector('[name="profile-add-place"]'));
+
+const popupCardSubmitBtn = popupCard.querySelector('.popup__btn');
+const profileSubmitBtn = document.querySelector('#popup_btn');
+
+const validationConfig = {
+    formSelector: '.popup__card',
+    inputSelector: '.popup__row',
+    submitButtonSelector: '.popup__btn',
+    inactiveButtonClass: 'popup__btn_disabled',
+    //inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__row-error_active'
+  };
+
+const formAddPlace = document.querySelector('[name="profile-add-place"]');
+const fromSettings = document.querySelector('[name="profile-settings"]');
+const formNewPlace = new FormValidator(formAddPlace, validationConfig);
 formNewPlace.enableValidation();
-const formRefreshDescription = new FormValidator(document.querySelector('[name="profile-settings"]'));
+const formRefreshDescription = new FormValidator(fromSettings, validationConfig);
 formRefreshDescription.enableValidation();
 
 function createCard(name, link){
@@ -86,7 +101,6 @@ closeCross.forEach(item =>  {
   });
 
 addPlaceBtn.addEventListener('click', function(){
-    const popupCardSubmitBtn = popupCard.querySelector('.popup__btn');
     popupCardSubmitBtn.setAttribute('disabled', 'disabled');
     popupCardSubmitBtn.classList.add('popup__btn_disabled');
     placeInput.value = '';
@@ -97,7 +111,7 @@ addPlaceBtn.addEventListener('click', function(){
 settingsBtn.addEventListener('click', function(){
     nameInputVal.value = profileName.textContent;
     jobInputVal.value = profileStatus.textContent;
-    document.querySelector('#popup_btn').classList.remove('popup__btn_disabled');
+    profileSubmitBtn.classList.remove('popup__btn_disabled');
     formRefreshDescription._resetErrors();
     openPopup(popupProfile);
 }, false);
