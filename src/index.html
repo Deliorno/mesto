@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./pages/index.css">
+    <!-- <link rel="stylesheet" href="./pages/index.css"> -->
     <title>Mesto</title>
 </head>
 <body class="main">
     <div class="popup" id="popup_image">
         <div class="popup__container">
             <button type="button" class="popup__close-cross" id="close-image"></button>
-            <img class = 'popup__image' src='https://images.unsplash.com/photo-1607190074257-dd4b7af0309f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80' alt='картинка'> 
+            <img class = 'popup__image' src='' alt='картинка'> 
             <p class="popup__subtitle"></p>
         </div>
     </div>
@@ -49,12 +49,12 @@
         </div>
     </div>
     <header class="header">
-        <img alt="Лого" src="./images/logo.svg" class="header__logo">
+        <img alt="Лого" src="<%=require('./images/logo.svg')%>" class="header__logo">
     </header>
     <main class="content">
         <section class="profile">
             <div class="profile__info">
-                <img alt="Автар" src="./images/profileImage.png" class="profile__avatar">
+                <img alt="Автар" src="<%=require('./images/profileImage.png')%>" class="profile__avatar">
                 <div class="profile__text-info">
                     <div class="profile__row">
                         <h1 class="profile__name" id="profile__name">Жак-Ив Кусто</h1>
@@ -73,7 +73,7 @@
         </footer>
     <template id="gallery_item">
         <div class="gallery__item">
-            <img class='gallery__trash-bin' src='./images/trash.svg' alt="Удалить">
+            <img class='gallery__trash-bin' src="<%=require('./images/trash.svg')%>" alt="Удалить">
             <img alt="Картинка" src="#" class="gallery__item-pic">
             <div class="gallery__info">
                 <h2 class="gallery__item-title"></h2>
@@ -81,16 +81,15 @@
             </div>
         </div>
     </template>
-    <script src="script/data.js"></script>
     <!-- <script src="script/validate.js"></script> -->
-    <script type='module' src="script/index.js"></script>
-    <script type='module' src="script/components/Card.js"></script>
-    <script type='module' src="script/components/FormValidator.js"></script>
-    <script type='module' src="script/components/Section.js"></script>
-    <script type='module' src="script/components/Popup.js"></script>
-    <script type='module' src="script/components/PopupWithImage.js"></script>
-    <script type='module' src="script/components/PopupWithForm.js"></script>
-    <script type='module' src="script/components/UserInfo.js"></script>
+    <!-- <script type='module' src="./pages/index.js"></script>
+    <script type='module' src="./script/components/Card.js"></script>
+    <script type='module' src="./script/components/FormValidator.js"></script>
+    <script type='module' src="./script/components/Section.js"></script>
+    <script type='module' src="./script/components/Popup.js"></script>
+    <script type='module' src="./script/components/PopupWithImage.js"></script>
+    <script type='module' src="./script/components/PopupWithForm.js"></script>
+    <script type='module' src="./script/components/UserInfo.js"></script> -->
 
 </body>
 </html>

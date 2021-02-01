@@ -1,9 +1,10 @@
-import {Card} from './components/Card.js';
-import {FormValidator} from './components/FormValidator.js';
-import {Section} from './components/Section.js';
-import {PopupWithForm} from './components/PopupWithForm.js';
-import {UserInfo} from './components/UserInfo.js';
-import {PopupWithImage} from './components/PopupWithImage.js';
+import './index.css';
+import {Card} from '../script/components/Card.js';
+import {FormValidator} from '../script/components/FormValidator.js';
+import {Section} from '../script/components/Section.js';
+import {PopupWithForm} from '../script/components/PopupWithForm.js';
+import {UserInfo} from '../script/components/UserInfo.js';
+import {PopupWithImage} from '../script/components/PopupWithImage.js';
 import {
   popupProfile,
   popupCard,
@@ -20,7 +21,7 @@ import {
   formAddPlace,
   fromSettings,
   initialCards
-} from './utils/constants.js';
+} from '../script/utils/constants.js';
 const setUserInfo = new UserInfo(nameInputVal, jobInputVal);
 
 const formNewPlace = new FormValidator(formAddPlace, validationConfig);
