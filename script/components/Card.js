@@ -1,13 +1,14 @@
 //import initialCards from "./data.js"
 //import {openPopup} from './index.js'
-const popupImage = document.querySelector('#popup_image');
-const popupImageClass = document.querySelector('.popup__image');
+import {PopupWithImage} from './PopupWithImage.js';
+//const popupImageClass = document.querySelector('.popup__image');
 const subtitle = document.querySelector('.popup__subtitle');
 export class Card {
-    constructor(name, link, openPopup){
+    constructor(name, link, handleCardClick){
         this._name = name;
         this._link = link;
-        this._openPopup = openPopup;
+        this._openPic = handleCardClick;
+        //this._openPopup = openPopup;
     }
 
     _getTemplate(){
@@ -22,10 +23,11 @@ export class Card {
         const pic = this._element.querySelector('.gallery__item-pic');
         pic.src = this._link;
         pic.alt = this._name;
-        this._element.querySelector('.gallery__item-title').textContent = this._name;
+        const subtitle = this._element.querySelector('.gallery__item-title');
+        subtitle.textContent = this._name;
 
         this._setEventListeners(pic);
-
+    
         // - Вернём элемент наружу!
         return this._element;
         }
@@ -34,12 +36,12 @@ export class Card {
         like.classList.toggle("gallery__item-like_active");
 }
 
-    _openImage(){
-        popupImageClass.src = this._link;
-        popupImageClass.alt = this._name;
-        subtitle.textContent = this._name;
-        this._openPopup(popupImage);
-}
+//     _openImage(){
+//         popupImageClass.src = this._link;
+//         popupImageClass.alt = this._name;
+//         subtitle.textContent = this._name;
+//         this._openPopup(popupImage);
+// }
 
     _deleteImage(bin){
         bin.closest('.gallery__item').remove();
@@ -51,7 +53,9 @@ export class Card {
       });
 
     pic.addEventListener('click', () => {
-         this._openImage();
+        console.log(this._name)
+        
+         this._openPic(this._name, this._link);
        });
 
     this._element.querySelector('.gallery__trash-bin').addEventListener('click',() => {
