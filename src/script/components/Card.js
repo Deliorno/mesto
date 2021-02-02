@@ -1,4 +1,4 @@
-const subtitle = document.querySelector('.popup__subtitle');
+//const subtitle = document.querySelector('.popup__subtitle');
 export class Card {
     constructor(name, link, handleCardClick){
         this._name = name;

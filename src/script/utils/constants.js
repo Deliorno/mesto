@@ -33,7 +33,7 @@ export const settingsBtn = document.querySelector('.profile__settings');
 export const galleryForClass = '.gallery';
 export const placeInput = document.querySelector('#place');
 export const linkInput = document.querySelector('#link');
-export const popupCardSubmitBtn = popupCard.querySelector('.popup__btn');
+export const popupCardSubmitBtn = document.querySelector('#popup_add_btn');
 export const popupImage = document.querySelector('#popup_image');
 export const validationConfig = {
     formSelector: '.popup__card',
