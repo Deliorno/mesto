@@ -1,7 +1,3 @@
-//import initialCards from "./data.js"
-//import {openPopup} from './index.js'
-import {PopupWithImage} from './PopupWithImage.js';
-//const popupImageClass = document.querySelector('.popup__image');
 const subtitle = document.querySelector('.popup__subtitle');
 export class Card {
     constructor(name, link, handleCardClick){
