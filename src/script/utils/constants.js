@@ -45,3 +45,4 @@ export const validationConfig = {
   };
 export const formAddPlace = document.querySelector('[name="profile-add-place"]');
 export const fromSettings = document.querySelector('[name="profile-settings"]');
+export const galleryTemplate = document.querySelector('#gallery_item').content;

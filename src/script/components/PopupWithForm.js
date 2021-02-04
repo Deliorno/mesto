@@ -10,28 +10,30 @@ export class PopupWithForm extends Popup{
 
     _getInputValues(){
         //элементы полей
-
+        console.log(this._form)
         this._inputs = {}
         this._inputList.forEach(input =>{
             this._inputs[input.name] = input.value;
         })
-        return this._inputs;
+        //console.log({name:this._inputs.place, link:this._inputs.link})
+        return {name:this._inputs.place, link:this._inputs.link};
     }
 
     close(){
         super.close();
     
-        this._inputList.forEach(input =>{
-            input.textContent = '';
-        })
+        this._form.reset();
+        // this._inputList.forEach(input =>{
+        //     input.textContent = '';
+        // })
     }
 
     setEventListeners(){
         super.setEventListeners();
-        this._buttonSubmit.addEventListener('click', (evt)=>{
+        this._form.addEventListener('submit', (evt)=>{
             evt.preventDefault();
-            this.close();
             this._submit(this._getInputValues());
+            this.close();
         });
     }
 }

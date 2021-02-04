@@ -1,4 +1,4 @@
-import './index.css';
+ import './index.css';
 import {Card} from '../script/components/Card.js';
 import {FormValidator} from '../script/components/FormValidator.js';
 import {Section} from '../script/components/Section.js';
@@ -20,9 +20,12 @@ import {
   validationConfig,
   formAddPlace,
   fromSettings,
-  initialCards
+  initialCards,
+  galleryTemplate
 } from '../script/utils/constants.js';
 const setUserInfo = new UserInfo(nameInputVal, jobInputVal);
+
+const fullSizeImage = new PopupWithImage(popupImage);
 
 const formNewPlace = new FormValidator(formAddPlace, validationConfig);
 formNewPlace.enableValidation();
@@ -30,27 +33,26 @@ formNewPlace.enableValidation();
 const formRefreshDescription = new FormValidator(fromSettings, validationConfig);
 formRefreshDescription.enableValidation();
 
+function createCard(item){
+  const card = new Card(item.name, item.link, galleryTemplate, handleCardClick);
+  const cardElement = card.renderCard();
+  return cardElement;
+}
+  
+
 const cardsFromData = new Section({
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(item.name, item.link, handleCardClick);
-      const cardElement = card.renderCard();
-      cardsFromData.addItem(cardElement);
+      createCard(item);
+      cardsFromData.addItem(createCard(item));
     }
   }, galleryForClass);
 
   cardsFromData.renderItems();
 
-function addCardFormSubmit(inputs){
-    const cardsFromFrom = new Section({
-        items: [{name:inputs.place,link:inputs.link}],
-        renderer: (item) => {
-            const card = new Card(item.name, item.link, handleCardClick);
-          const cardElement = card.renderCard();
-          cardsFromFrom.addItem(cardElement);
-        }
-      }, galleryForClass);
-    cardsFromFrom.renderItems();
+  function addCardFormSubmit(inputs){
+    console.log(createCard(inputs))
+    cardsFromData.addItem(createCard(inputs));
 }
 
 function submitProfileForm () {
@@ -58,25 +60,23 @@ function submitProfileForm () {
 }
 
 function handleCardClick(name, link){
-  const fullSizeImage = new PopupWithImage(popupImage, name, link);
-      fullSizeImage.open();
+      fullSizeImage.open(name, link);
       fullSizeImage.setEventListeners();
 }
 
 addPlaceBtn.addEventListener('click', function(){
     popupCardSubmitBtn.setAttribute('disabled', 'disabled');
     popupCardSubmitBtn.classList.add('popup__btn_disabled');
-    placeInput.value = '';
-    linkInput.value = '';
+    const cardForm = new PopupWithForm (popupCard, addCardFormSubmit);
+    cardForm.setEventListeners();
+    cardForm.open();
     formNewPlace._resetErrors();
-    const inputs= new PopupWithForm (popupCard, addCardFormSubmit);
-    inputs.setEventListeners();
-    inputs.open();
 }, false);
 
 settingsBtn.addEventListener('click', function(){
-    const openPopup = new PopupWithForm(popupProfile, submitProfileForm);
-    openPopup.setEventListeners();
-    openPopup.open();
+    const profileForm = new PopupWithForm(popupProfile, submitProfileForm);
+    profileForm.setEventListeners();
+    profileForm.open();
     setUserInfo.getUserInfo();
+    formRefreshDescription._resetErrors();
 }, false);

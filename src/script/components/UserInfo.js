@@ -4,7 +4,6 @@ export class UserInfo{
         this._info = info;
         this._profileName = document.querySelector('#profile__name');
         this._profileStatus = document.querySelector('#profile__status');
-        this._form = document.querySelector('#popup_add');
     }
 
     getUserInfo(){

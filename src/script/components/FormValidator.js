@@ -2,13 +2,14 @@ export class FormValidator {
     constructor(form, validationConfig){
         this.form = form;
         this.validationConfig = validationConfig;
+        this._inputList = Array.from(this.form.querySelectorAll(this.validationConfig.inputSelector));
+        this._submitButton = this.form.querySelector(this.validationConfig.submitButtonSelector);
     }
     
     enableValidation(){
         this.form.addEventListener('submit', (evt) => {
             evt.preventDefault();
         })
-
         this._setEventListener();
     }
 
@@ -17,6 +18,8 @@ export class FormValidator {
         error.forEach((err) => {
             err.textContent='';
       });
+      console.log(this.form.checkValidity())
+      this._toggleButton(this._submitButton,this.form.checkValidity());
     }
 
     _showInputError(inputElement, errorMessage){
@@ -51,12 +54,11 @@ export class FormValidator {
         }
 
     _setEventListener(){
-        const inputList = Array.from(this.form.querySelectorAll(this.validationConfig.inputSelector));
-        const submitButton = this.form.querySelector(this.validationConfig.submitButtonSelector);
-        inputList.forEach((inputElement) => {
+        this._inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
               this._validateText(inputElement);
-              this._toggleButton(submitButton, this.form.checkValidity());
+              this._toggleButton(this._submitButton, this.form.checkValidity());
+              console.log(this.form.checkValidity());
             });
           });
     }

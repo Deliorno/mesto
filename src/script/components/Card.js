@@ -1,15 +1,13 @@
-//const subtitle = document.querySelector('.popup__subtitle');
 export class Card {
-    constructor(name, link, handleCardClick){
+    constructor(name, link, galleryTemplate, handleCardClick){
         this._name = name;
         this._link = link;
         this._openPic = handleCardClick;
-        //this._openPopup = openPopup;
+        this._galTemplate = galleryTemplate;
     }
 
     _getTemplate(){
-        const galleryTemplate = document.querySelector('#gallery_item').content.cloneNode(true);
-        return galleryTemplate;
+        return this._galTemplate.cloneNode(true);
     }
 
     renderCard(){
@@ -32,30 +30,21 @@ export class Card {
         like.classList.toggle("gallery__item-like_active");
 }
 
-//     _openImage(){
-//         popupImageClass.src = this._link;
-//         popupImageClass.alt = this._name;
-//         subtitle.textContent = this._name;
-//         this._openPopup(popupImage);
-// }
-
     _deleteImage(bin){
         bin.closest('.gallery__item').remove();
     }
 
     _setEventListeners(pic){
-    this._element.querySelector('.gallery__item-like').addEventListener('click', () => {
-        this._toogleLike(event.target);
+    this._element.querySelector('.gallery__item-like').addEventListener('click', (evt) => {
+        this._toogleLike(evt.target);
       });
 
     pic.addEventListener('click', () => {
-        console.log(this._name)
-        
          this._openPic(this._name, this._link);
        });
 
-    this._element.querySelector('.gallery__trash-bin').addEventListener('click',() => {
-        this._deleteImage(event.target);
+    this._element.querySelector('.gallery__trash-bin').addEventListener('click',(evt) => {
+        this._deleteImage(evt.target);
        });
     
     }
