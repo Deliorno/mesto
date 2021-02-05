@@ -13,7 +13,7 @@ export class FormValidator {
         this._setEventListener();
     }
 
-    _resetErrors(){
+    resetErrors(){
         const error = Array.from(this.form.querySelectorAll('.popup__row-error'));
         error.forEach((err) => {
             err.textContent='';

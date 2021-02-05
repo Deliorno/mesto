@@ -23,6 +23,12 @@ import {
   initialCards,
   galleryTemplate
 } from '../script/utils/constants.js';
+const cardForm = new PopupWithForm (popupCard, addCardFormSubmit);
+cardForm.setEventListeners();
+
+const profileForm = new PopupWithForm(popupProfile, submitProfileForm);
+profileForm.setEventListeners();
+
 const setUserInfo = new UserInfo(nameInputVal, jobInputVal);
 
 const fullSizeImage = new PopupWithImage(popupImage);
@@ -67,16 +73,12 @@ function handleCardClick(name, link){
 addPlaceBtn.addEventListener('click', function(){
     popupCardSubmitBtn.setAttribute('disabled', 'disabled');
     popupCardSubmitBtn.classList.add('popup__btn_disabled');
-    const cardForm = new PopupWithForm (popupCard, addCardFormSubmit);
-    cardForm.setEventListeners();
     cardForm.open();
-    formNewPlace._resetErrors();
+    formNewPlace.resetErrors();
 }, false);
 
 settingsBtn.addEventListener('click', function(){
-    const profileForm = new PopupWithForm(popupProfile, submitProfileForm);
-    profileForm.setEventListeners();
     profileForm.open();
     setUserInfo.getUserInfo();
-    formRefreshDescription._resetErrors();
+    formRefreshDescription.resetErrors();
 }, false);
