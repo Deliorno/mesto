@@ -5,6 +5,7 @@ import {Section} from '../script/components/Section.js';
 import {PopupWithForm} from '../script/components/PopupWithForm.js';
 import {UserInfo} from '../script/components/UserInfo.js';
 import {PopupWithImage} from '../script/components/PopupWithImage.js';
+import {Api} from '../script/components/Api.js';
 import {
   popupProfile,
   popupCard,
@@ -21,8 +22,27 @@ import {
   formAddPlace,
   fromSettings,
   initialCards,
-  galleryTemplate
+  galleryTemplate,
+  apiConfig
 } from '../script/utils/constants.js';
+
+const api = new Api({
+  url:"https://mesto.nomoreparties.co/v1/cohort-20/cards",
+  headers:{
+    'content-type': 'application/json',
+    'authorization':'cc284eaa-be85-4547-943e-099c0aa22925'
+  }
+})
+
+const task = api.getData();
+
+task
+  .then((result) => {
+  console.log(result);
+})
+
+
+
 const cardForm = new PopupWithForm (popupCard, addCardFormSubmit);
 cardForm.setEventListeners();
 

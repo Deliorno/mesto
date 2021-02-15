@@ -43,6 +43,9 @@ export const validationConfig = {
     //inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__row-error_active'
   };
+export const apiConfig = {
+    url: ''
+}
 export const formAddPlace = document.querySelector('[name="profile-add-place"]');
 export const fromSettings = document.querySelector('[name="profile-settings"]');
 export const galleryTemplate = document.querySelector('#gallery_item').content;
