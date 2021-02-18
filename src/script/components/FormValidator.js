@@ -18,7 +18,6 @@ export class FormValidator {
         error.forEach((err) => {
             err.textContent='';
       });
-      console.log(this.form.checkValidity())
       this._toggleButton(this._submitButton,this.form.checkValidity());
     }
 
@@ -58,7 +57,6 @@ export class FormValidator {
             inputElement.addEventListener('input', () => {
               this._validateText(inputElement);
               this._toggleButton(this._submitButton, this.form.checkValidity());
-              console.log(this.form.checkValidity());
             });
           });
     }

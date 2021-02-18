@@ -1,0 +1,8 @@
+.gallery__item-like-amount{
+align-self: flex-end;
+background-color: transparent;
+border:none;
+outline: none;
+margin: 3px auto 0 auto;
+padding: 0;
+}

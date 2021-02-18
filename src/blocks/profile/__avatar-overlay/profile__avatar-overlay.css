@@ -1,0 +1,31 @@
+.profile__avatar-overlay{
+    position: absolute;
+    height:120px;
+    width:120px;
+    border-radius: 100%;
+    margin:0;
+    display: block;
+    margin:0;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index: 1;
+    transition: 0.7s;
+}
+
+.profile__avatar-overlay:hover{
+    cursor:pointer;
+    background: url(../../../images/bigPen.svg), black;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
+    margin:0;
+    display: block;
+    margin:0;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index: 1;
+    }

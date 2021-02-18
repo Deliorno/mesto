@@ -49,3 +49,12 @@ export const apiConfig = {
 export const formAddPlace = document.querySelector('[name="profile-add-place"]');
 export const fromSettings = document.querySelector('[name="profile-settings"]');
 export const galleryTemplate = document.querySelector('#gallery_item').content;
+export const profileName = document.querySelector('#profile__name');
+export const profileStatus = document.querySelector('#profile__status');
+export const profileImage = document.querySelector('.profile__avatar');
+export const profileOverlay = document.querySelector('.profile__avatar-overlay');
+export const popupRefreshAvatar = document.querySelector('#popup_refresh_avatar');
+export const deleteCheckPopup = document.querySelector('#delete_check');
+export const avatarInput = document.querySelector('#link_avatar');
+export const profileAvatar = document.querySelector('.profile__avatar');
+export const formAvatar = document.querySelector('[name="profile-avatar"]');
