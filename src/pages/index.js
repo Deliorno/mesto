@@ -101,6 +101,7 @@ const cardsFromData = new Section({
 function createCard(item){
   //console.log(apiUser._id)
   const card = new Card(item.name, item.link, item.likes, item._id, item.owner._id, apiUser._id, galleryTemplate, handleCardClick, deleteForm, api);
+  console.log(item._id)
   const cardElement = card.renderCard();
   return cardElement;
 }
@@ -182,3 +183,5 @@ settingsBtn.addEventListener('click', function(){
   setUserInfo.getUserInfo();
   formRefreshDescription.resetErrors();
 }, false);
+
+
