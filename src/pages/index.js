@@ -83,9 +83,11 @@ const apiData = api
     cardsFromData.renderItems();
   })
 
+  const avatarImage = document.querySelector('.profile__avatar');
 const apiUser = api
   .getUserInfo()
   .then((userData) => {
+    avatarImage.src = userData.avatar;
     profileName.textContent= userData.name;
     profileStatus.textContent= userData.about;
 })

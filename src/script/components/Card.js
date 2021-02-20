@@ -48,7 +48,7 @@ export class Card {
                 .putLike(this._cardId)
                 .then(response => {
                     likesAmount.textContent = response.likes.length;
-                    //console.log(response)
+                    console.log(like.innerHTML);
                 }
                     );
             //likesAmount.textContent = countedLikes + 1;
