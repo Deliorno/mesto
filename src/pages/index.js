@@ -70,27 +70,25 @@ formNewPlace.enableValidation();
 const formRefreshDescription = new FormValidator(fromSettings, validationConfig);
 formRefreshDescription.enableValidation();
 
-const apiData = api
-  .getData()
-  .then((cardsData) => {
-    const cardsFromData = new Section({
-    items: cardsData,
-    renderer: (item) => {
-      createCard(item);
-      cardsFromData.addItem(createCard(item));
-    }
-  }, galleryForClass);
-    cardsFromData.renderItems();
-  })
+const avatarImage = document.querySelector('.profile__avatar');
 
-  const avatarImage = document.querySelector('.profile__avatar');
-const apiUser = api
-  .getUserInfo()
-  .then((userData) => {
+Promise.all([api.getUserInfo(), api.getData()])
+  .then(([userData, cardsData]) => {
     avatarImage.src = userData.avatar;
     profileName.textContent= userData.name;
     profileStatus.textContent= userData.about;
-})
+
+    const cardsFromData = new Section({
+      items: cardsData,
+      renderer: (item) => {
+        //createCard(item);
+        //console.log(item)
+        cardsFromData.addItem(createCard(item, userData));
+      }
+    }, galleryForClass);
+      cardsFromData.renderItems();
+    //console.log(userData)
+}).catch(err => console.log(`Ошибка загрузки данных: ${err}`));
 
 const cardsFromData = new Section({
     items: initialCards,
@@ -100,25 +98,28 @@ const cardsFromData = new Section({
     }
 }, galleryForClass);
 
-function createCard(item){
-  //console.log(apiUser._id)
-  const card = new Card(item.name, item.link, item.likes, item._id, item.owner._id, apiUser._id, galleryTemplate, handleCardClick, deleteForm, api);
-  console.log(item._id)
+function createCard(item, userData){
+  const card = new Card(item, userData, galleryTemplate, handleCardClick, deleteForm, api, cardDelete);
+  //console.log(item._id)
   const cardElement = card.renderCard();
   return cardElement;
 }
 
 function addCardFormSubmit(inputs){
   cardForm._renderLoading(true);
-  const addNewCard = api
+  Promise.all([api.getUserInfo()])
+  .then(([userData]) => {
+    api
     .addNewCard(cardForm._getInputValues())
     .then((cardsData) => {
-      cardsFromData.addItem(createCard(cardsData));
+      cardsFromData.addItem(createCard(cardsData, userData));
     })
     .finally(() => {
       cardForm._renderLoading(false);
       cardForm.close();})
+}).catch(err => console.log(err));
 }
+
 
 function submitProfileForm() {
   profileForm._renderLoading(true);
@@ -146,21 +147,8 @@ function submitAvatarForm(){
 
 }
 
-function cardDelete(cardId, bin){
-  // deleteForm.open();
-  // console.log(deleteForm);
-  // console.log(cardId)
-  // deleteYesBtn.addEventListener('click', (evt)=>{
-  //     evt.preventDefault;
-  //     this._api
-  //         .deleteCard(cardId)
-  //         .then(()=>{
-  //           bin.closest('.gallery__item').remove();
-  //           deleteForm.close();
-  //         })
-  //         .catch((err)=> console.log(err))
-  //     //bin.closest('.gallery__item').remove();
-  // })
+function cardDelete(cardId, cardElement){
+  
 }
 
 function handleCardClick(name, link){
@@ -185,5 +173,7 @@ settingsBtn.addEventListener('click', function(){
   setUserInfo.getUserInfo();
   formRefreshDescription.resetErrors();
 }, false);
+
+//document.querySelector('#yes_btn').addEventListener('click', cardDelete)
 
 
