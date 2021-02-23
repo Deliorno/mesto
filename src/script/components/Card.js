@@ -39,7 +39,7 @@ export class Card {
         this._setEventListeners(pic, likesAmount, this._likes.length);
 
         this._likes.forEach((item) =>{
-              if (item._id == 'e8533cc4566da5704598188a'){
+              if (item._id == this._userId){
                  //console.log(item._id)
                  this._element.querySelector('.gallery__item-like').classList.add("gallery__item-like_active");
               }
@@ -74,7 +74,6 @@ export class Card {
     }
 
     _deleteImage(bin){
-        //console.log(this._cardId)
         document.querySelector('#yes_btn').addEventListener('click', (evt)=>{
             evt.preventDefault();
             this._api
@@ -83,23 +82,21 @@ export class Card {
                 .catch((err)=> console.log(err))
             this.deleteForm.close();
         })
-
     }
 
     _setEventListeners(pic, likesAmount, countedLikes){
-    this._element.querySelector('.gallery__item-like').addEventListener('click', (evt) => {
-        this._toogleLike(evt.target, likesAmount, countedLikes);
-      });
+        this._element.querySelector('.gallery__trash-bin').addEventListener('click',(evt) => {
+            this.deleteForm.open();
+            this._deleteImage(evt.target);
+           });
 
-    pic.addEventListener('click', () => {
-         this._openPic(this._name, this._link);
-       });
+        this._element.querySelector('.gallery__item-like').addEventListener('click', (evt) => {
+            this._toogleLike(evt.target, likesAmount, countedLikes);
+        });
 
-    this._element.querySelector('.gallery__trash-bin').addEventListener('click',(evt) => {
-        //console.log(evt.target)
-        this.deleteForm.open();
-        this._deleteImage(evt.target);
-       });
-    
+        pic.addEventListener('click', () => {
+            this._openPic(this._name, this._link);
+        });
+        
     }
 }

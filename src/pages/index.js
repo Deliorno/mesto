@@ -6,6 +6,7 @@ import {Section} from '../script/components/Section.js';
 import {PopupWithForm} from '../script/components/PopupWithForm.js';
 import {UserInfo} from '../script/components/UserInfo.js';
 import {PopupWithImage} from '../script/components/PopupWithImage.js';
+import {PopupWithConfirm} from '../script/components/PopupWithConfirm.js';
 import {Api} from '../script/components/Api.js';
 import {
   popupProfile,
@@ -54,10 +55,12 @@ profileForm.setEventListeners();
 const avatarForm = new PopupWithForm(popupRefreshAvatar, submitAvatarForm)
 avatarForm.setEventListeners();
 
-const deleteForm = new Popup(deleteCheckPopup)
+const deleteForm = new PopupWithConfirm(deleteCheckPopup, cardDelete)
 deleteForm.setEventListeners();
 
-const setUserInfo = new UserInfo(nameInputVal, jobInputVal);
+const setUserInfo = new UserInfo(profileName, profileStatus, profileAvatar, api);
+setUserInfo.getUserInfo();
+console.log(setUserInfo.getUserInfo().then())
 
 const fullSizeImage = new PopupWithImage(popupImage);
 
@@ -72,13 +75,14 @@ formRefreshDescription.enableValidation();
 
 const avatarImage = document.querySelector('.profile__avatar');
 
+let cardsFromData;
+let userInfo;
+
 Promise.all([api.getUserInfo(), api.getData()])
   .then(([userData, cardsData]) => {
-    avatarImage.src = userData.avatar;
-    profileName.textContent= userData.name;
-    profileStatus.textContent= userData.about;
+    userInfo = userData;
 
-    const cardsFromData = new Section({
+    cardsFromData = new Section({
       items: cardsData,
       renderer: (item) => {
         //createCard(item);
@@ -89,17 +93,10 @@ Promise.all([api.getUserInfo(), api.getData()])
       cardsFromData.renderItems();
     //console.log(userData)
 }).catch(err => console.log(`Ошибка загрузки данных: ${err}`));
-
-const cardsFromData = new Section({
-    items: initialCards,
-    renderer: (item) => {
-      createCard(item);
-      cardsFromData.addItem(createCard(item));
-    }
-}, galleryForClass);
+ console.log(userInfo);
 
 function createCard(item, userData){
-  const card = new Card(item, userData, galleryTemplate, handleCardClick, deleteForm, api, cardDelete);
+  const card = new Card(item, userData, galleryTemplate, handleCardClick, deleteForm, api);
   //console.log(item._id)
   const cardElement = card.renderCard();
   return cardElement;
@@ -110,9 +107,9 @@ function addCardFormSubmit(inputs){
   Promise.all([api.getUserInfo()])
   .then(([userData]) => {
     api
-    .addNewCard(cardForm._getInputValues())
-    .then((cardsData) => {
-      cardsFromData.addItem(createCard(cardsData, userData));
+    .addNewCard(inputs)
+    .then((inputs) => {
+      cardsFromData.addItem(createCard(inputs, userData));
     })
     .finally(() => {
       cardForm._renderLoading(false);
@@ -121,13 +118,12 @@ function addCardFormSubmit(inputs){
 }
 
 
-function submitProfileForm() {
-  profileForm._renderLoading(true);
+function submitProfileForm(inputs) {
+  profileForm._renderLoading(true);console.log(inputs)
   const refreshUserInfo = api
-    .addUserInfo(setUserInfo.setUserInfo())
-    .then((userData) => {
-      profileName.textContent= userData.name;
-      profileStatus.textContent= userData.about;
+    .addUserInfo(inputs)
+    .then((inputs) => {
+      setUserInfo.setUserInfo(inputs);
     })
     .finally(() => {
       profileForm._renderLoading(false);
@@ -147,10 +143,15 @@ function submitAvatarForm(){
 
 }
 
-function cardDelete(cardId, cardElement){
-  
+function cardDelete(cardId, api, bin){
+  let o = cardId;
+  let a = api;
+  let b = bin;
+  console.log(o,a,b)
+  return o,a,b;
+  //console.log(deleteForm.saveCardToDelete());
 }
-
+//cardDelete();
 function handleCardClick(name, link){
   fullSizeImage.open(name, link);
   fullSizeImage.setEventListeners();
