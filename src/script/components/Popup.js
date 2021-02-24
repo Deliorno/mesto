@@ -14,7 +14,7 @@ export class Popup{
     }
 
     _overlayCLose(event){
-        if (event.target.classList === this._popup.classList){
+        if (event.target === this._popup){
             this.close();
         }
     }

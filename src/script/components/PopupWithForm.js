@@ -15,17 +15,16 @@ export class PopupWithForm extends Popup{
         this._inputList.forEach(input =>{
             this._inputs[input.name] = input.value;
         })
-        //console.log(this._inputs.place, this._inputs.link)
+        //console.log({name:this._inputs.place, link:this._inputs.link})
         return this._inputs;
     }
 
     _renderLoading(isLoading){
         if (isLoading){
-            //console.log(isLoading)
+            console.log(isLoading)
             this._buttonSubmit.textContent = 'Сохранение..'
-          //content.classList.add('content_hidden');
         } else {
-           // console.log(isLoading)
+            console.log(isLoading)
             this._buttonSubmit.textContent = 'Сохранить'
         }
       }

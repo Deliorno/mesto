@@ -55,12 +55,9 @@ profileForm.setEventListeners();
 const avatarForm = new PopupWithForm(popupRefreshAvatar, submitAvatarForm)
 avatarForm.setEventListeners();
 
-const deleteForm = new PopupWithConfirm(deleteCheckPopup, cardDelete)
-deleteForm.setEventListeners();
-
 const setUserInfo = new UserInfo(profileName, profileStatus, profileAvatar, api);
-setUserInfo.getUserInfo();
-console.log(setUserInfo.getUserInfo().then())
+setUserInfo.setUserInfo();
+//console.log(setUserInfo.getUserInfo().then())
 
 const fullSizeImage = new PopupWithImage(popupImage);
 
@@ -96,7 +93,7 @@ Promise.all([api.getUserInfo(), api.getData()])
  console.log(userInfo);
 
 function createCard(item, userData){
-  const card = new Card(item, userData, galleryTemplate, handleCardClick, deleteForm, api);
+  const card = new Card(item, userData, galleryTemplate, handleCardClick, api, cardDelete);
   //console.log(item._id)
   const cardElement = card.renderCard();
   return cardElement;
@@ -119,11 +116,12 @@ function addCardFormSubmit(inputs){
 
 
 function submitProfileForm(inputs) {
-  profileForm._renderLoading(true);console.log(inputs)
+  profileForm._renderLoading(true);
+  console.log(inputs)
   const refreshUserInfo = api
     .addUserInfo(inputs)
-    .then((inputs) => {
-      setUserInfo.setUserInfo(inputs);
+    .then(() => {
+      setUserInfo.setUserInfo();
     })
     .finally(() => {
       profileForm._renderLoading(false);
@@ -143,12 +141,14 @@ function submitAvatarForm(){
 
 }
 
-function cardDelete(cardId, api, bin){
-  let o = cardId;
-  let a = api;
-  let b = bin;
-  console.log(o,a,b)
-  return o,a,b;
+function cardDelete(bin, cardId){
+  //console.log(bin, cardId, api)
+  const deleteForm = new PopupWithConfirm(deleteCheckPopup, bin, cardId, api)
+  deleteForm.setEventListeners();
+  //deleteForm.open();
+  deleteForm.deleteConfirm();
+  //console.log('Открыл');
+  //deleteForm.deleteConfirm(bin, cardId, api);
   //console.log(deleteForm.saveCardToDelete());
 }
 //cardDelete();
@@ -170,8 +170,9 @@ profileOverlay.addEventListener('click', function(){
 }, false);
 
 settingsBtn.addEventListener('click', function(){
-  profileForm.open();
   setUserInfo.getUserInfo();
+  profileForm.open();
+  //setUserInfo.getUserInfo();
   formRefreshDescription.resetErrors();
 }, false);
 

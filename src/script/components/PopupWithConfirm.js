@@ -1,52 +1,54 @@
 import {Popup} from './Popup.js';
 export class PopupWithConfirm extends Popup{
-    constructor(popupSelector, cardDelete) {
+    constructor(popupSelector, bin, cardId, api) {
         super(popupSelector);
         this._buttonSubmit = this._popup.querySelector('.popup__btn');
         this._form = this._popup.querySelector('.popup__card');
-        this._submit = cardDelete;
-        this._saveCardToDelete = this.saveCardToDelete.bind(this);
-        this.api;
+        this.api = api;
+        this.bin = bin;
+        this.cardId = cardId;
+        this.deleteConfirmed = this.deleteConfirmed.bind(this);
     }
 
     close(){
         super.close();
     }
 
-    getCardToDelete(cardId, api, bin){
-       // console.log(cardId, api, bin)
-        let o = cardId;
-        let a = api;
-        let b = bin;
-        this._submit(cardId, api, bin);
-        this.saveCardToDelete(cardId, api, bin);
+    open(){
+        super.open();
     }
 
-    saveCardToDelete(cardId, api, bin){
-        let o = cardId;
-        this.api = api;
-        let b = bin;
-        console.log(o,this.api,b)
-        this._submit();
-        return o, this.api, b;
-    }
-
-    deleteConfirmed(){
-        console.log(this._saveCardToDelete());
-        api
-                .deleteCard(cardId)
-                .then(()=>bin.closest('.gallery__item').remove())
+    deleteConfirmed(){   
+        console.log('Дел');
+        console.log(this.bin, this.cardId, this.api);
+        this._renderLoading(true);
+            this.api
+                .deleteCard(this.cardId)
+                .then(()=>{
+                    this.bin.closest('.gallery__item').remove();
+                    this.close();
+                    this._buttonSubmit.removeEventListener('click', this.deleteConfirmed);   
+            })
                 .catch((err)=> console.log(err))
-            this.deleteForm.close();
+                .finally(() => {
+                    this._renderLoading(false);})
+    }
+
+    _renderLoading(isLoading){
+        if (isLoading){
+            this._buttonSubmit.textContent = 'Удаление..'
+        } else {
+            console.log(isLoading)
+            this._buttonSubmit.textContent = 'Да'
+        }
+      }
+
+    deleteConfirm(){
+        this.open();
+        this._buttonSubmit.addEventListener('click', this.deleteConfirmed);
     }
 
     setEventListeners(){
         super.setEventListeners();
-        // this._buttonSubmit.addEventListener('click', (evt)=>{
-        //     evt.preventDefault();
-        //     //console.log(this._saveCardToDelete())
-        //     this.deleteConfirmed();
-        //     //this.close();
-        // });
     }
 }

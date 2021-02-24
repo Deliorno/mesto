@@ -1,5 +1,5 @@
 export class Card {
-    constructor(item, userData, galleryTemplate, handleCardClick, deleteForm, api, funcDelete){
+    constructor(item, userData, galleryTemplate, handleCardClick, api, funcDelete){
         this._name = item.name;
         this._link = item.link;
         this._likes = item.likes;
@@ -9,8 +9,7 @@ export class Card {
         this._userId = userData._id;
         this._cardId = item._id;
         this._api = api
-        this.deleteForm = deleteForm;
-        //this._funcDelete = funcDelete;
+        this._funcDelete = funcDelete;
     }
 
     _getTemplate(){
@@ -26,9 +25,6 @@ export class Card {
         pic.alt = this._name;
         const likesAmount = this._element.querySelector('.gallery__item-like-amount');
         likesAmount.textContent = this._likes.length;
-        //console.log(this._likes.length)
-        //console.log(this._ownerId)
-        //console.log(this._userId)
         const subtitle = this._element.querySelector('.gallery__item-title');
         subtitle.textContent = this._name;
         
@@ -40,7 +36,6 @@ export class Card {
 
         this._likes.forEach((item) =>{
               if (item._id == this._userId){
-                 //console.log(item._id)
                  this._element.querySelector('.gallery__item-like').classList.add("gallery__item-like_active");
               }
          })
@@ -59,7 +54,6 @@ export class Card {
                     likesAmount.textContent = response.likes.length;
                 }
                     );
-            //likesAmount.textContent = countedLikes + 1;
         } else {
             like.classList.remove("gallery__item-like_active");
             this._api
@@ -68,25 +62,15 @@ export class Card {
                     likesAmount.textContent = response.likes.length;
                     console.log(response)
                 });
-                
-            //likesAmount.textContent = countedLikes;
         }
     }
 
     _deleteImage(bin){
-        document.querySelector('#yes_btn').addEventListener('click', (evt)=>{
-            evt.preventDefault();
-            this._api
-                .deleteCard(this._cardId)
-                .then(()=>bin.closest('.gallery__item').remove())
-                .catch((err)=> console.log(err))
-            this.deleteForm.close();
-        })
+        this._funcDelete(bin, this._cardId);
     }
 
     _setEventListeners(pic, likesAmount, countedLikes){
         this._element.querySelector('.gallery__trash-bin').addEventListener('click',(evt) => {
-            this.deleteForm.open();
             this._deleteImage(evt.target);
            });
 

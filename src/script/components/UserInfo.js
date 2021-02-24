@@ -4,26 +4,23 @@ export class UserInfo{
         this._info = info;
         this._avatar = avatar;
         this._api = api;
-        //this._api = api;
-        // this._profileName = document.querySelector('#profile__name');
-        // this._profileStatus = document.querySelector('#profile__status');
+        this.nameInput = document.querySelector('#name');
+        this.jobInput = document.querySelector('#job');
     }
 
     getUserInfo(){
-        //let userInfo;
+        this.nameInput.value = this._name.textContent;
+        this.jobInput.value = this._info.textContent;
+        return {name:this._name.textContent,about:this._info.textContent}
+    }
+
+    setUserInfo(){
         Promise.all([this._api.getUserInfo()])
             .then(([userData]) => {
                 this._name.textContent = userData.name;
                 this._info.textContent = userData.about;
                 this._avatar.src = userData.avatar;
             })
-            //.finally((userData)=> {return userInfo = userData})
-            .catch(err => console.log(`Ошибка загрузки данных: ${err}`));
-    }
-
-    setUserInfo(inputs){
-        this._name.textContent = inputs.name;
-        this._info.textContent = inputs.about;
-        //this._avatar.textContent = inputs.avatar;
+            .catch(err => console.log(`Ошибка загрузки данных: ${err}`));  
     }
 }
