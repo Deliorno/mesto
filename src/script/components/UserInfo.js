@@ -14,13 +14,9 @@ export class UserInfo{
         return {name:this._name.textContent,about:this._info.textContent}
     }
 
-    setUserInfo(){
-        Promise.all([this._api.getUserInfo()])
-            .then(([userData]) => {
+    setUserInfo(userData){
                 this._name.textContent = userData.name;
                 this._info.textContent = userData.about;
                 this._avatar.src = userData.avatar;
-            })
-            .catch(err => console.log(`Ошибка загрузки данных: ${err}`));  
     }
 }

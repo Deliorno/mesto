@@ -12,6 +12,7 @@ export class PopupWithConfirm extends Popup{
 
     close(){
         super.close();
+        this._buttonSubmit.removeEventListener('click', this.deleteConfirmed);
     }
 
     open(){

@@ -56,7 +56,7 @@ const avatarForm = new PopupWithForm(popupRefreshAvatar, submitAvatarForm)
 avatarForm.setEventListeners();
 
 const setUserInfo = new UserInfo(profileName, profileStatus, profileAvatar, api);
-setUserInfo.setUserInfo();
+//setUserInfo.setUserInfo();
 //console.log(setUserInfo.getUserInfo().then())
 
 const fullSizeImage = new PopupWithImage(popupImage);
@@ -79,7 +79,8 @@ let userId;
 Promise.all([api.getUserInfo(), api.getData()])
   .then(([userData, cardsData]) => {
     userId = userData._id;
-
+    setUserInfo.setUserInfo(userData);
+    console.log(userData)
     cardsFromData = new Section({
       items: cardsData,
       renderer: (item) => {
@@ -116,8 +117,8 @@ function submitProfileForm(inputs) {
   console.log(inputs)
      api
     .addUserInfo(inputs)
-    .then(() => {
-      setUserInfo.setUserInfo();
+    .then((userData) => {
+      setUserInfo.setUserInfo(userData);
     })
     .finally(() => {
       profileForm._renderLoading(false);
@@ -128,8 +129,8 @@ function submitAvatarForm(){
   avatarForm._renderLoading(true);
     api
     .addAvatar(avatarInput.value)
-    .then(() => {
-      setUserInfo.setUserInfo();
+    .then((userData) => {
+      setUserInfo.setUserInfo(userData);
     })
     .finally(() => {
       avatarForm._renderLoading(false);
