@@ -1,12 +1,12 @@
 export class Card {
-    constructor(item, userData, galleryTemplate, handleCardClick, api, funcDelete){
+    constructor(item, userId, galleryTemplate, handleCardClick, api, funcDelete){
         this._name = item.name;
         this._link = item.link;
         this._likes = item.likes;
         this._openPic = handleCardClick;
         this._galTemplate = galleryTemplate;
         this._ownerId = item.owner._id;
-        this._userId = userData._id;
+        this._userId = userId;
         this._cardId = item._id;
         this._api = api
         this._funcDelete = funcDelete;
@@ -27,7 +27,7 @@ export class Card {
         likesAmount.textContent = this._likes.length;
         const subtitle = this._element.querySelector('.gallery__item-title');
         subtitle.textContent = this._name;
-        
+        //console.log(this._userId, this._ownerId)
         if(this._ownerId != this._userId){
             this._element.querySelector('.gallery__trash-bin').style.display = 'none';
         }
